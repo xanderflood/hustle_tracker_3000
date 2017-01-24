@@ -1,0 +1,1 @@
+json.array! @hustles, partial: 'hustles/hustle', as: :hustle

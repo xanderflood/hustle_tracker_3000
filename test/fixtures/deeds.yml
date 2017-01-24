@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hustle: one
+  desc: MyString
+  started: 2017-01-24 11:19:01
+  finished: 2017-01-24 11:19:01
+  points: 1
+
+two:
+  hustle: two
+  desc: MyString
+  started: 2017-01-24 11:19:01
+  finished: 2017-01-24 11:19:01
+  points: 1

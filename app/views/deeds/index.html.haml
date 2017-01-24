@@ -1,0 +1,29 @@
+%h1 Listing deeds
+
+%table
+  %thead
+    %tr
+      %th Hustle
+      %th Desc
+      %th Started
+      %th Finished
+      %th Points
+      %th
+      %th
+      %th
+
+  %tbody
+    - @deeds.each do |deed|
+      %tr
+        %td= deed.hustle
+        %td= deed.desc
+        %td= deed.started
+        %td= deed.finished
+        %td= deed.points
+        %td= link_to 'Show', deed
+        %td= link_to 'Edit', edit_deed_path(deed)
+        %td= link_to 'Destroy', deed, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Deed', new_deed_path

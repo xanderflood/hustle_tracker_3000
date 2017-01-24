@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Hustle:
+  = @deed.hustle
+%p
+  %b Desc:
+  = @deed.desc
+%p
+  %b Started:
+  = @deed.started
+%p
+  %b Finished:
+  = @deed.finished
+%p
+  %b Points:
+  = @deed.points
+
+= link_to 'Edit', edit_deed_path(@deed)
+\|
+= link_to 'Back', deeds_path

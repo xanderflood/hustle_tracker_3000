@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @hustle.user
+%p
+  %b Name:
+  = @hustle.name
+%p
+  %b Created:
+  = @hustle.created
+%p
+  %b Modified:
+  = @hustle.modified
+
+= link_to 'Edit', edit_hustle_path(@hustle)
+\|
+= link_to 'Back', hustles_path

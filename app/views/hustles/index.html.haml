@@ -1,0 +1,27 @@
+%h1 Listing hustles
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Name
+      %th Created
+      %th Modified
+      %th
+      %th
+      %th
+
+  %tbody
+    - @hustles.each do |hustle|
+      %tr
+        %td= hustle.user
+        %td= hustle.name
+        %td= hustle.created
+        %td= hustle.modified
+        %td= link_to 'Show', hustle
+        %td= link_to 'Edit', edit_hustle_path(hustle)
+        %td= link_to 'Destroy', hustle, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Hustle', new_hustle_path

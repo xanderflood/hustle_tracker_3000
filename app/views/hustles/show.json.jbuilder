@@ -1,0 +1,1 @@
+json.partial! "hustles/hustle", hustle: @hustle

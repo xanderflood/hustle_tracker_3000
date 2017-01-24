@@ -1,0 +1,25 @@
+= form_for @deed do |f|
+  - if @deed.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@deed.errors.count, "error")} prohibited this deed from being saved:"
+      %ul
+        - @deed.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :hustle
+    = f.text_field :hustle
+  .field
+    = f.label :desc
+    = f.text_field :desc
+  .field
+    = f.label :started
+    = f.datetime_select :started
+  .field
+    = f.label :finished
+    = f.datetime_select :finished
+  .field
+    = f.label :points
+    = f.number_field :points
+  .actions
+    = f.submit 'Save'
