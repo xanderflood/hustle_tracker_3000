@@ -24,7 +24,12 @@ class HustlesController < ApplicationController
   # POST /hustles
   # POST /hustles.json
   def create
-    @hustle = Hustle.new(hustle_params)
+    @hustle = Hustle.new(
+      user: current_user,
+      name: params[:name],
+      created: Time.now,
+      modified: Time.now
+    )
 
     respond_to do |format|
       if @hustle.save

@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: "hustles#index"
+  root to: "sessions#new"
+
+  devise_scope :user do
+    get 'sign_in', to: 'devise/sessions#new'
+  end
 end
