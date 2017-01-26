@@ -1,0 +1,6 @@
+%tr
+	%td deed.name
+	%td deed.finished
+	%td deed.points
+  %td= link_to 'Edit', edit_deed_path(deed)
+  %td= link_to 'Destroy', deed, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -8,4 +8,12 @@
     %title HustleTracker 3000
 
   %body
+
+    - if flash[:alert].present?
+      %p
+        = flash[:alert]
+    - if flash[:notice].present?
+      %p
+        = flash[:notice]
+
     = yield

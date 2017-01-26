@@ -45,6 +45,11 @@ class HustlesController < ApplicationController
   # PATCH/PUT /hustles/1
   # PATCH/PUT /hustles/1.json
   def update
+    hustle_params = {
+      user: current_user,
+      name: params[:name],
+      modified: Time.now
+    }
     respond_to do |format|
       if @hustle.update(hustle_params)
         format.html { redirect_to @hustle, notice: 'Hustle was successfully updated.' }
@@ -73,7 +78,7 @@ class HustlesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def hustle_params
-      params.require(:hustle).permit(:user_id, :name, :created, :modified)
-    end
+    # def hustle_params
+    #   params.require(:hustle).permit(:user_id, :name, :created, :modified)
+    # end
 end

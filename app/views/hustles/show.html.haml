@@ -1,9 +1,6 @@
 %p#notice= notice
 
 %p
-  %b User:
-  = @hustle.user
-%p
   %b Name:
   = @hustle.name
 %p
@@ -12,6 +9,18 @@
 %p
   %b Modified:
   = @hustle.modified
+%p
+  %b Total points:
+  = @hustle.total_points
+
+%table
+  %thead
+    %th Name
+    %th When
+    %th Points
+  %tbody
+    - @hustle.deeds.each do |deed|
+      = render partial: 'deed', locals: { deed: deed }
 
 = link_to 'Edit', edit_hustle_path(@hustle)
 \|

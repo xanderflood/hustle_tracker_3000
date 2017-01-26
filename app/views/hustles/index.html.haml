@@ -1,5 +1,9 @@
 %h1 Listing hustles
 
+%h2= current_user.name
+
+= link_to "Sign out", destroy_user_session_path, :method => :delete
+
 %table
   %thead
     %tr
@@ -13,14 +17,7 @@
 
   %tbody
     - @hustles.each do |hustle|
-      %tr
-        %td= hustle.user
-        %td= hustle.name
-        %td= hustle.created
-        %td= hustle.modified
-        %td= link_to 'Show', hustle
-        %td= link_to 'Edit', edit_hustle_path(hustle)
-        %td= link_to 'Destroy', hustle, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      = render partial: 'hustle', locals: { hustle: hustle }
 
 %br
 
