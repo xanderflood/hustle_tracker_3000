@@ -3,6 +3,10 @@ class Hustle < ApplicationRecord
   has_many :deeds
 
   def total_points
-    @total_points |= deeds.map{ |deed| deed.points }.inject(:+) | 0
+    if deeds.empty?
+      0
+    else
+      self.deeds.map{ |deed| deed.points }.inject(:+)
+    end
   end
 end

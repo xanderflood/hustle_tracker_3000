@@ -26,7 +26,7 @@ class HustlesController < ApplicationController
   def create
     @hustle = Hustle.new(
       user: current_user,
-      name: params[:name],
+      name: params[:hustle][:name],
       created: Time.now,
       modified: Time.now
     )

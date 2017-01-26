@@ -11,7 +11,8 @@
 
     - if flash[:alert].present?
       %p
-        = flash[:alert]
+        %text{ color: :red }
+          = flash[:alert]
     - if flash[:notice].present?
       %p
         = flash[:notice]
