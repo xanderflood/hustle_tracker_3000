@@ -1,4 +1,5 @@
 !!!
+
 %html
   %head
     = csrf_meta_tags
@@ -17,4 +18,15 @@
       %p
         = flash[:notice]
 
-    = yield
+    .container
+      -# = render partial: 'shared/pill', locals: { panel_id: :test, head_right: 'right', head_left: '15', body: 'shared/test' }
+
+      .panel-group
+        .panel.panel-default
+          %a{ 'data-toggle' => "collapse", href: "#collapse" }
+            .panel-heading
+              %h4.panel-title hey
+          .panel-collapse.collapse{ id: "collapse" }
+            .panel-body
+              this is a test, this is only a test
+      = yield
