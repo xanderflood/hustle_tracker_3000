@@ -1,27 +1,25 @@
 -# at least one of `head_*` locals is required, as well as `body`
 :ruby
-  heads = [:head_left, :head_center, :head_right].map { |v| local_assigns[:v].present? ? 1 : 0 }.inject :+
+  heads = [:head_left, :head_center, :head_right].map { |v| local_assigns[v].present? ? 1 : 0 }.inject :+
   width = heads.zero? ? 0 : 12 / heads # always an integer since 1,2,3 all divide 12
   panel_id = 0 unless local_assigns[:panel_id].present?
   body_locals = {} unless local_assigns[:body_locals].present?
   footer_locals = {} unless local_assigns[:footer_locals].present?
 
-
 .panel-group
   .panel.panel-default
     %a{ 'data-toggle' => "collapse", href: "#collapse#{panel_id}" }
       .panel-heading
-        %h4.panel-title
-          .row
-            - if local_assigns[:head_left].present?
-              %div{ class: "col-md-#{width}" }
-                = head_left
-            - if local_assigns[:head_center].present?
-              %div{ class: "col-md-#{width} text-center" }
-                = head_center
-            - if local_assigns[:head_right].present?
-              %div{ class: "col-md-#{width} text-right" }
-                = head_right
+        .row
+          - if local_assigns[:head_left].present?
+            %div{ class: "col-xs-#{width}" }
+              = head_left
+          - if local_assigns[:head_center].present?
+            %div{ class: "col-xs-#{width} text-center" }
+              = head_center
+          - if local_assigns[:head_right].present?
+            %div{ class: "col-xs-#{width} text-right" }
+              = head_right
     .panel-collapse.collapse{ id: "collapse#{panel_id}" }
       .panel-body
         = render partial: body, locals: body_locals

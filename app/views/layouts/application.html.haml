@@ -2,6 +2,7 @@
 
 %html
   %head
+    = stylesheet_link_tag bootstrap_css_url
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -19,14 +20,7 @@
         = flash[:notice]
 
     .container
-      -# = render partial: 'shared/pill', locals: { panel_id: :test, head_right: 'right', head_left: '15', body: 'shared/test' }
-
-      .panel-group
-        .panel.panel-default
-          %a{ 'data-toggle' => "collapse", href: "#collapse" }
-            .panel-heading
-              %h4.panel-title hey
-          .panel-collapse.collapse{ id: "collapse" }
-            .panel-body
-              this is a test, this is only a test
+      = render partial: 'shared/pill', locals: { panel_id: :test, head_right: 'right', head_left: '15', body: 'shared/test' }
       = yield
+
+    = javascript_include_tag bootstrap_js_url
