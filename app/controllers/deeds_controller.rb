@@ -1,4 +1,5 @@
 class DeedsController < ApplicationController
+  before_action :set_hustle, only: [:new, :create, :destroy]
   before_action :set_deed, only: [:show, :edit, :update, :destroy]
 
   # GET /deeds
@@ -24,11 +25,15 @@ class DeedsController < ApplicationController
   # POST /deeds
   # POST /deeds.json
   def create
-    @deed = Deed.new(deed_params)
+    @deed = @hustle.deeds.new(deed_params.merge(
+      hustle_id: params[:hustle_id],
+      started: Time.now,
+      finished: Time.now
+    ))
 
     respond_to do |format|
       if @deed.save
-        format.html { redirect_to @deed, notice: 'Deed was successfully created.' }
+        format.html { redirect_to @hustle, notice: 'Deed was successfully created.' }
         format.json { render :show, status: :created, location: @deed }
       else
         format.html { render :new }
@@ -56,15 +61,19 @@ class DeedsController < ApplicationController
   def destroy
     @deed.destroy
     respond_to do |format|
-      format.html { redirect_to deeds_url, notice: 'Deed was successfully destroyed.' }
+      format.html { redirect_to @hustle, notice: 'Deed was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+    def set_hustle
+      @hustle = Hustle.find params[:hustle_id]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_deed
-      @deed = Deed.find(params[:id])
+      @deed = Deed.find params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

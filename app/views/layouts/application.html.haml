@@ -10,17 +10,29 @@
     %title HustleTracker 3000
 
   %body
-
-    - if flash[:alert].present?
-      %p
-        %text{ color: :red }
-          = flash[:alert]
-    - if flash[:notice].present?
-      %p
-        = flash[:notice]
-
     .container
-      = render partial: 'shared/pill', locals: { panel_id: :test, head_right: 'right', head_left: '15', body: 'shared/test' }
-      = yield
+      .row
+        .col-md-3.col-md-0
+        .col-md-6.col-md-12
+          - if flash[:alert].present?
+            .panel-group
+              .panel.panel-default
+                .panel-heading
+                  %text{ color: :red }
+                    = flash[:alert]
+          - if flash[:notice].present?
+            .panel-group
+              .panel.panel-default
+                .panel-heading
+                  = flash[:notice]
+          = yield
+      %hr
+      %footer
+        %small.text-center{ color: :gray }
+          hustle tracker 3000
+          = "\u00A9"
+          2016 Xander Flood
+
+        .col-md-3.col-md-0
 
     = javascript_include_tag bootstrap_js_url

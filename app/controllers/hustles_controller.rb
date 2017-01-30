@@ -4,7 +4,7 @@ class HustlesController < ApplicationController
   # GET /hustles
   # GET /hustles.json
   def index
-    @hustles = Hustle.all
+    @hustles = current_user.hustles
   end
 
   # GET /hustles/1

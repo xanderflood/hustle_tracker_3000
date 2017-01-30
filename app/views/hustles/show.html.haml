@@ -1,27 +1,22 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @hustle.name
-%p
-  %b Created:
-  = @hustle.created
-%p
-  %b Modified:
-  = @hustle.modified
-%p
-  %b Total points:
-  = @hustle.total_points
+.panel-group
+  .panel.panel-default
+    .panel-heading
+      .row
+        .col-xs-4
+          %b
+            = @hustle.name
+        .col-xs-4.text-center
+          = link_to 'do a deed', new_hustle_deed_path(@hustle)
+        .col-xs-4.text-right
+          %small
+            = "#{@hustle.total_points} points"
 
-%table
-  %thead
-    %th Name
-    %th When
-    %th Points
-  %tbody
-    - @hustle.deeds.each do |deed|
-      = render partial: 'deed', locals: { deed: deed }
+- @hustle.deeds.order(:finished).reverse.each do |deed|
+  = deed_blob deed
 
-= link_to 'Edit', edit_hustle_path(@hustle)
-\|
-= link_to 'Back', hustles_path
+-#= link_to 'Edit', edit_hustle_path(@hustle)
+-#\|
+%p
+  = link_to 'Back', hustles_path

@@ -1,6 +1,3 @@
-%tr
-	%td deed.name
-	%td deed.finished
-	%td deed.points
-  %td= link_to 'Edit', edit_deed_path(deed)
-  %td= link_to 'Destroy', deed, :method => :delete, :data => { :confirm => 'Are you sure?' }
+.row
+  .col-xs-9
+  .col-xs-3= link_to 'destroy', hustle_deed_path(deed), :method => :delete, :data => { :confirm => 'Are you sure?' }

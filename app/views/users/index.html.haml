@@ -12,10 +12,10 @@
     - @users.each do |user|
       %tr
         %td= user.name
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'show', user
+        %td= link_to 'edit', edit_user_path(user)
+        %td= link_to 'eestroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New User', new_user_path
+= link_to 'new user', new_user_path

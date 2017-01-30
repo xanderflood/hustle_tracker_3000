@@ -1,0 +1,21 @@
+/* background coloring for blobs */
+.panel-heading, .panel-footer {
+  font-weight: bold;
+  background-color: rgb(190,190,190);
+}
+
+.panel-body {
+  background-color: #f7f7ff;
+}
+
+a:hover {
+  color: #F66;
+}
+
+a:link, a:visited {
+  color: #448;
+}
+
+a:active {
+  color: #666;
+}

@@ -1,24 +1,14 @@
-%h1 Listing hustles
 
-%h2= current_user.name
+%h1
+  your hustles
+%h3.text-right
+  = current_user.name
 
-= link_to "Sign out", destroy_user_session_path, :method => :delete
+- @hustles.order(:modified).reverse.each do |hustle|
+  = hustle_blob hustle
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Created
-      %th Modified
-      %th Total
-      %th
-      %th
-      %th
-
-  %tbody
-    - @hustles.each do |hustle|
-      = render partial: 'hustle', locals: { hustle: hustle }
-
-%br
-
-= link_to 'New Hustle', new_hustle_path
+.row
+  .col-xs-6.text-center
+    = link_to 'new hustle', new_hustle_path
+  .col-xs-6.text-center
+    = link_to 'sign out', destroy_user_session_path, :method => :delete

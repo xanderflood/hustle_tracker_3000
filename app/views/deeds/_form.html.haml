@@ -1,4 +1,4 @@
-= form_for @deed do |f|
+= form_for [@hustle, @deed] do |f|
   - if @deed.errors.any?
     #error_explanation
       %h2= "#{pluralize(@deed.errors.count, "error")} prohibited this deed from being saved:"
@@ -8,18 +8,12 @@
 
   .field
     = f.label :hustle
-    = f.text_field :hustle
+    %input{ type: :text, disabled: :disabled, value: @hustle.name }
   .field
     = f.label :desc
-    = f.text_field :desc
-  .field
-    = f.label :started
-    = f.datetime_select :started
-  .field
-    = f.label :finished
-    = f.datetime_select :finished
+    = f.text_area :desc
   .field
     = f.label :points
-    = f.number_field :points
+    = f.number_field :points, value: 1, options: { width: 2 }
   .actions
     = f.submit 'Save'
