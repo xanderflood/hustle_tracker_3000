@@ -17,6 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 *~
+Gemfile.lock
 
 # Ignore Byebug command history file.
 .byebug_history
