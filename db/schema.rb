@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126041650) do
+ActiveRecord::Schema.define(version: 20170131041501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20170126041650) do
     t.datetime "started"
     t.datetime "finished"
     t.integer  "points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "hustle_id"
+    t.integer  "state",      default: 3
+    t.datetime "thought_at"
     t.index ["hustle_id"], name: "index_deeds_on_hustle_id", using: :btree
   end
 

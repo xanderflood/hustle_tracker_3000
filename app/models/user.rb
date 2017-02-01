@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :hustles
-  has_many :deeds, through: :hustle
+  has_many :deeds, through: :hustles
 end

@@ -21,6 +21,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 # haml because erb=:(
 gem 'haml-rails'
+# for time charts
+gem 'chartkick'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

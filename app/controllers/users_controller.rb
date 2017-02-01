@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   skip_before_filter :authenticate_user!
 
+  TIME_SPANS = [:days, :weeks, :months, :years]
+
   # GET /users
   # GET /users.json
   def index
@@ -12,6 +14,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @chart_data = {}
+
+    TIME_SPANS.each do |s|
+      @chart_data[s] = Hash.new 0
+      current_user.deeds.each { |deed| @chart_data[s][deed.hustle.name] += 1 if deed.finished > 1.send(s).ago }
+    end
   end
 
   # GET /users/new

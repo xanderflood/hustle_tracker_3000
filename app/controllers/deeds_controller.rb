@@ -26,7 +26,9 @@ class DeedsController < ApplicationController
   # POST /deeds.json
   def create
     @deed = @hustle.deeds.new(deed_params.merge(
+      state: :done,
       hustle_id: params[:hustle_id],
+      thought_at: Time.now,
       started: Time.now,
       finished: Time.now
     ))

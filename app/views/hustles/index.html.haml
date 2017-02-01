@@ -8,7 +8,10 @@
   = hustle_blob hustle
 
 .row
-  .col-xs-6.text-center
+  .col-xs-4.text-center
     = link_to 'new hustle', new_hustle_path
-  .col-xs-6.text-center
+  .col-xs-4.text-center
+    %b
+      = link_to 'timecharts', user_path(current_user)
+  .col-xs-4.text-center
     = link_to 'sign out', destroy_user_session_path, :method => :delete
