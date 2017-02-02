@@ -6,12 +6,14 @@
 %p
   %b Desc:
   = @deed.desc
-%p
-  %b Started:
-  = @deed.started
-%p
-  %b Finished:
-  = @deed.finished
+- if @deed.started?
+  %p
+    %b Started:
+    = @deed.started
+- if @deed.done?
+  %p
+    %b Finished:
+    = @deed.finished
 %p
   %b Points:
   = @deed.points

@@ -7,6 +7,8 @@
           %li= msg
 
   .field
+    = f.select :state, [:thought, :active, :done]
+  .field
     = f.label :hustle
     %input{ type: :text, disabled: :disabled, value: @hustle.name }
   .field

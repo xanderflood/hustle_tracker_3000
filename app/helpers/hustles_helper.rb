@@ -1,4 +1,10 @@
 module HustlesHelper
+  STATE_TERMS = {
+    thought: :thought,
+    active: :started,
+    done: :finished
+  }
+
   def hustle_blob hustle
     return render partial: 'shared/blob', locals: {
       panel_id: "hustle_blob_#{hustle.id}",
@@ -14,10 +20,14 @@ module HustlesHelper
     return render partial: 'shared/blob', locals: {
       panel_id: "deed_blob_#{deed.id}",
       head_left: truncate(deed.desc),
-      head_center: "#{time_ago_in_words(deed.finished)} ago",
+      head_center: state_description(deed),
       head_right: "#{deed.points}",
       body: 'deed',
       body_locals: { deed: deed }
     }
+  end
+
+  def state_description deed
+    "#{STATE_TERMS[deed.state]} #{time_ago_in_words(deed.when) } ago"
   end
 end

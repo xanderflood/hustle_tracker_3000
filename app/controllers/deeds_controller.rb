@@ -26,11 +26,7 @@ class DeedsController < ApplicationController
   # POST /deeds.json
   def create
     @deed = @hustle.deeds.new(deed_params.merge(
-      state: :done,
-      hustle_id: params[:hustle_id],
-      thought_at: Time.now,
-      started: Time.now,
-      finished: Time.now
+      thought_at: Time.now
     ))
 
     respond_to do |format|
@@ -80,6 +76,6 @@ class DeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deed_params
-      params.require(:deed).permit(:hustle_id, :desc, :started, :finished, :points)
+      params.require(:deed).permit(:hustle_id, :desc, :points, :state)
     end
 end
