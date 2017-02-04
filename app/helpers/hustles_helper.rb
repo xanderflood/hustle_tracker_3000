@@ -28,6 +28,6 @@ module HustlesHelper
   end
 
   def state_description deed
-    "#{STATE_TERMS[deed.state]} #{time_ago_in_words(deed.when) } ago"
+    "#{STATE_TERMS[deed.state.to_sym]} #{time_ago_in_words(deed.when) } ago"
   end
 end

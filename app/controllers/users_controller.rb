@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
     TIME_SPANS.each do |s|
       @chart_data[s] = Hash.new 0
-      current_user.deeds.each { |deed| @chart_data[s][deed.hustle.name] += 1 if deed.finished > 1.send(s).ago }
+      current_user.deeds.each { |deed| @chart_data[s][deed.hustle.name] += 1 if deed.finished_at > 1.send(s).ago }
     end
   end
 

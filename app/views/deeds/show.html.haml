@@ -9,11 +9,11 @@
 - if @deed.started?
   %p
     %b Started:
-    = @deed.started
+    = @deed.started_at
 - if @deed.done?
   %p
     %b Finished:
-    = @deed.finished
+    = @deed.finished_at
 %p
   %b Points:
   = @deed.points

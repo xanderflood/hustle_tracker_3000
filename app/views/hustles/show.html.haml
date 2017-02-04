@@ -1,6 +1,8 @@
 %p#notice= notice
 
-.panel-group
+= render partial: 'deed_filters'
+
+.panel-group.hustle-header
   .panel.panel-default
     .panel-heading
       .row
@@ -13,8 +15,10 @@
           %small
             = "#{@hustle.total_points} points"
 
-- @hustle.deeds.order(:finished).reverse.each do |deed|
-  = deed_blob deed
+.hustle-deeds
+  - @hustle.deeds.order(:finished_at).reverse.each do |deed|
+    .deed-blob{ data: deed.to_h }
+      = deed_blob deed
 
 -#= link_to 'Edit', edit_hustle_path(@hustle)
 -#\|

@@ -3,8 +3,8 @@ class CreateDeeds < ActiveRecord::Migration[5.0]
     create_table :deeds do |t|
       # t.belongs_to :hustle, foreign_key: true
       t.string :desc
-      t.datetime :started
-      t.datetime :finished
+      t.datetime :started_at
+      t.datetime :finished_at
       t.integer :points
 
       t.timestamps

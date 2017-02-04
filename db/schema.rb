@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131041501) do
+ActiveRecord::Schema.define(version: 20170202041147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "deeds", force: :cascade do |t|
     t.string   "desc"
-    t.datetime "started"
-    t.datetime "finished"
+    t.datetime "started_at"
+    t.datetime "finished_at"
     t.integer  "points"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "hustle_id"
-    t.integer  "state",      default: 3
+    t.integer  "state",       default: 3
     t.datetime "thought_at"
     t.index ["hustle_id"], name: "index_deeds_on_hustle_id", using: :btree
   end

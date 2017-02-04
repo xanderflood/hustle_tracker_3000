@@ -27,8 +27,8 @@ class Deed < ApplicationRecord
   #
 
   def init
-    @started_at = @thought_at if started?
-    @finished_at = @thought_at if done?
+    started_at = thought_at if started?
+    finished_at = thought_at if done?
   end
 
   def started?; [:thought, :active].include? state; end
@@ -40,15 +40,21 @@ class Deed < ApplicationRecord
   def finish
   end
 
-  def when what=@state.to_sym
+  def when what=state.to_sym
     if what == :thought
-      @thought_at
+      thought_at
     elsif what == :active
-      @started_at
+      started_at
     elsif what == :done
-      @finished_at
+      finished_at
     else
       raise StandardError
     end
+  end
+
+  def to_h
+    {
+      state: state
+    }
   end
 end

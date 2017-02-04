@@ -23,6 +23,8 @@ gem 'devise'
 gem 'haml-rails'
 # for time charts
 gem 'chartkick'
+# js utility functions
+gem 'underscore-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
