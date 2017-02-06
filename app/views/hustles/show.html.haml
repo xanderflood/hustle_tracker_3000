@@ -39,7 +39,7 @@
             = thoughts.map(&:points).inject :+
             points
   #thoughts-list.collapse{ class: (active.empty? ? 'in' : '') }
-    = render partial: 'deed_list', locals: { deeds: thoughts }
+    = render partial: 'shared/deed_list', locals: { deeds: thoughts }
 
 %hr
 
@@ -55,7 +55,7 @@
             = done.map(&:points).inject :+
             points
   #done-list.collapse
-    = render partial: 'deed_list', locals: { deeds: done }
+    = render partial: 'shared/deed_list', locals: { deeds: done }
 
 %p
   = link_to 'Back', hustles_path

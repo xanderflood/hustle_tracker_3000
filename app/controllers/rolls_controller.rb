@@ -11,6 +11,10 @@ class RollsController < ApplicationController
   # GET /rolls/1
   # GET /rolls/1.json
   def show
+    @points_in_states = {}
+    @points_in_states.default = 0
+
+    @roll.deeds.each { |d| @points_in_states[d.state] += d.points }
   end
 
   # GET /rolls/new
