@@ -1,3 +1,41 @@
 .row
-  .col-xs-9
-  .col-xs-3= link_to 'destroy', hustle_deed_path(deed), :method => :delete, :data => { :confirm => 'Are you sure?' }
+  .col-xs-3 actions:
+  - if deed.total_elapsed < 30
+    .col-xs-9
+  - else
+    .col-xs-6.text-right time spent:
+    .col-cs-3
+      = distance_of_time_in_words deed.total_elapsed.seconds
+.row
+  .col-xs-3.text-right 
+    - if deed.started?
+      .dead-link start
+    - else
+      = link_to 'start', deed_start_path(deed), :method => :post
+  .col-xs-3.text-right
+    - if deed.active?
+      = link_to 'pause', deed_pause_path(deed), :method => :post
+    - else
+      .dead-link pause
+  .col-xs-3.text-right
+    - if deed.done?
+      .dead-link do
+    - else
+      = link_to 'do', deed_do_path(deed), :method => :post
+  .col-xs-3.text-right
+    = link_to 'destroy', hustle_deed_path(deed), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+.btn-group
+  .btn-group
+    %button.btn.btn-default.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
+      Add to roll
+      %span.caret
+
+    %ul.dropdown-menu
+      %li
+        %a{ href: '#'}
+          Add to new roll...
+      - current_user.rolls.each do |r|
+        %li
+          %a{ href: '#' }
+            = r.name

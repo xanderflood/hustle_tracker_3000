@@ -5,11 +5,13 @@
   panel_id = 0 unless local_assigns[:panel_id].present?
   body_locals = {} unless local_assigns[:body_locals].present?
   footer_locals = {} unless local_assigns[:footer_locals].present?
+  head_class = '' unless local_assigns[:head_class].present?
+  open = false unless local_assigns[:open].present?
 
 .panel-group
   .panel.panel-default
     %a{ 'data-toggle' => "collapse", href: "#collapse#{panel_id}" }
-      .panel-heading
+      .panel-heading{ class: head_class }
         .row
           - if local_assigns[:head_left].present?
             %div{ class: "col-xs-#{width}" }
@@ -20,7 +22,7 @@
           - if local_assigns[:head_right].present?
             %div{ class: "col-xs-#{width} text-right" }
               = head_right
-    .panel-collapse.collapse{ id: "collapse#{panel_id}" }
+    .panel-collapse.collapse{ id: "collapse#{panel_id}", class: (open ? 'in' : '') }
       .panel-body
         = render partial: body, locals: body_locals
       - if local_assigns[:footer].present?

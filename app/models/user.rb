@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :hustles
   has_many :deeds, through: :hustles
+
+  has_many :rolls
 end

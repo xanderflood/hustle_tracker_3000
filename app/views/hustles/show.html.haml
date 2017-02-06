@@ -1,26 +1,61 @@
-%p#notice= notice
+:ruby
+  active = @hustle.deeds.active.order(:eph_started_at).to_a
+  thoughts = @hustle.deeds.thought.order(:thought_at).to_a
+  done = @hustle.deeds.done.order(:finished_at).to_a
 
-= render partial: 'deed_filters'
-
-.panel-group.hustle-header
+.panel-group
   .panel.panel-default
     .panel-heading
       .row
         .col-xs-4
           %b
             = @hustle.name
+            %a
+              .glyphicon.glyphicon-pencil
         .col-xs-4.text-center
           = link_to 'do a deed', new_hustle_deed_path(@hustle)
         .col-xs-4.text-right
           %small
             = "#{@hustle.total_points} points"
 
-.hustle-deeds
-  - @hustle.deeds.order(:finished_at).reverse.each do |deed|
-    .deed-blob{ data: deed.to_h }
-      = deed_blob deed
+%hr
 
--#= link_to 'Edit', edit_hustle_path(@hustle)
--#\|
+-# active deeds, first one out
+- active.each do |deed|
+  = deed_blob deed, true
+
+  %hr
+
+-#next, a collapsible panel full of ideas, which is open unless there are active deeds
+- if thoughts.any?
+  %a{ href: '#thoughts-list', 'data-toggle' => 'collapse' }
+    .panel-group
+      .panel.panel-default
+        .row
+          .col-xs-6
+            = thoughts.count
+            thoughts
+          .col-xs-6.text-right
+            = thoughts.map(&:points).inject :+
+            points
+  #thoughts-list.collapse{ class: (active.empty? ? 'in' : '') }
+    = render partial: 'deed_list', locals: { deeds: thoughts }
+
+%hr
+
+- if done.any?
+  %a{ href: '#done-list', 'data-toggle' => 'collapse' }
+    .panel-group
+      .panel.panel-default
+        .row
+          .col-xs-6
+            = done.count
+            done
+          .col-xs-6.text-right
+            = done.map(&:points).inject :+
+            points
+  #done-list.collapse
+    = render partial: 'deed_list', locals: { deeds: done }
+
 %p
   = link_to 'Back', hustles_path

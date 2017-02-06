@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   skip_before_filter :authenticate_user!
 
   TIME_SPANS = [:days, :weeks, :months, :years]
@@ -14,12 +13,16 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @chart_data = {}
+    points_by_id = {}
+    points_by_id.default = 0
 
-    TIME_SPANS.each do |s|
-      @chart_data[s] = Hash.new 0
-      current_user.deeds.each { |deed| @chart_data[s][deed.hustle.name] += 1 if deed.finished_at > 1.send(s).ago }
+    @user.deeds.each do |d|
+      next unless d.done? && d.finished_at > 1.week.ago
+
+      points_by_id[d.hustle_id] += d.points
     end
+
+    @points_last_week = points_by_id.map { |k,v| [Hustle.find(k).name, v] }
   end
 
   # GET /users/new

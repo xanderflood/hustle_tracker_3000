@@ -4,10 +4,6 @@
   = @user.name
 
 .chartbox{ data: @chart_data.to_json }
-  = pie_chart @chart_data[:weeks], id: :timechart
-  = select_tag :scale, options_for_select(UsersController::TIME_SPANS, :weeks)
+  = pie_chart @points_last_week, id: :timechart
 
 = link_to 'Back', hustles_path
-
-:javascript
-  new TimeChart();

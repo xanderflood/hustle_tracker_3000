@@ -6,7 +6,7 @@
 
 .panel-body {
   background-color: #f7f7ff;
-}
+}col
 
 a:hover {
   color: #F66;
@@ -19,3 +19,15 @@ a:link, a:visited {
 a:active {
   color: #666;
 }
+
+.panel-heading.deed.thought {
+  background-color: #44AA44;
+}
+
+.panel-heading.deed.active {
+  background-color: #AAAA00;
+}
+
+.panel-heading.deed.done {
+}
+

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rolls
   devise_for :users
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -11,11 +12,21 @@ Rails.application.routes.draw do
         #post "new", to: :create, as: :new
       end
     end
+
+    resources :rolls, only: [:index, :new, :create, :show] do
+      post 'finish'
+    end
+
+    resources :deeds do
+      post 'start'
+      post 'pause'
+      post 'do'
+    end
   end
 
   devise_scope :user do
     unauthenticated do
-      root to: "devise/sessions#new"
+      root to: 'devise/sessions#new'
     end
     get 'sign_in', to: 'devise/sessions#new'
   end

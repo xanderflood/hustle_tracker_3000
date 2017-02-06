@@ -8,7 +8,6 @@ var TimeChart = (function() {
   };
 
   tc.updateChart = function() {
-    debugger;
     span = $('.chartbox select')[0].value
     data = JSON.parse($('.chartbox')[0].getAttribute('data'))[span]
 

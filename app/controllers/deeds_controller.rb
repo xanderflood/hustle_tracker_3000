@@ -1,6 +1,6 @@
 class DeedsController < ApplicationController
-  before_action :set_hustle, only: [:new, :create, :destroy]
-  before_action :set_deed, only: [:show, :edit, :update, :destroy]
+  before_action :set_deed, only: [:show, :edit, :update, :destroy, :start, :pause, :do]
+  before_action :set_hustle, only: [:new, :create, :destroy, :start, :pause, :do]
 
   # GET /deeds
   # GET /deeds.json
@@ -25,13 +25,11 @@ class DeedsController < ApplicationController
   # POST /deeds
   # POST /deeds.json
   def create
-    @deed = @hustle.deeds.new(deed_params.merge(
-      thought_at: Time.now
-    ))
+    @deed = @hustle.deeds.new(deed_params)
 
-    respond_to do |format|
-      if @deed.save
-        format.html { redirect_to @hustle, notice: 'Deed was successfully created.' }
+    respond_to do |format| 
+     if @deed.save
+        format.html { redirect_to @hustle, notice: 'deed created' }
         format.json { render :show, status: :created, location: @deed }
       else
         format.html { render :new }
@@ -54,6 +52,45 @@ class DeedsController < ApplicationController
     end
   end
 
+  def start
+    @deed.start
+    respond_to do |format|
+      if @deed.save
+        format.html { redirect_to @hustle, notice: 'deed started' }
+        format.json { render :show, status: :created, location: @deed }
+      else
+        format.html { render :new }
+        format.json { render json: @deed.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def pause
+    @deed.pause
+    respond_to do |format|
+      if @deed.save
+        format.html { redirect_to @hustle, notice: 'deed paused' }
+        format.json { render :show, status: :created, location: @deed }
+      else
+        format.html { render :new }
+        format.json { render json: @deed.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def do
+    @deed.do
+    respond_to do |format|
+      if @deed.save
+        format.html { redirect_to @hustle, notice: 'deed done' }
+        format.json { render :show, status: :created, location: @deed }
+      else
+        format.html { render :new }
+        format.json { render json: @deed.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /deeds/1
   # DELETE /deeds/1.json
   def destroy
@@ -66,12 +103,12 @@ class DeedsController < ApplicationController
 
   private
     def set_hustle
-      @hustle = Hustle.find params[:hustle_id]
+      @hustle = Hustle.find params[:hustle_id] rescue @hustle = @deed.hustle
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_deed
-      @deed = Deed.find params[:id]
+      @deed = Deed.find params[:id] rescue @deed = Deed.find params[:deed_id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

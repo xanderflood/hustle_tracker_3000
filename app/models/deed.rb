@@ -1,9 +1,14 @@
 class Deed < ApplicationRecord
   class StateError < StandardError; end
 
-  after_initialize :init
+  before_validation(on: :create) do
+    self.thought_at ||= Time.now
+    self.started_at ||= Time.now if started?
+    self.finished_at ||= Time.now if done?
+  end
 
   belongs_to :hustle
+  
   enum state: [:thought, :active, :done]
 
   validates :desc, presence: { message: "what did you do?" }
@@ -16,37 +21,50 @@ class Deed < ApplicationRecord
 
   # the initializer only needs state and a date, and `init` will assign the various dates appropriately
   # can i do something like this for update? esp. state update?
-  #
-  #
-  # => 
-  # => 
-  # => IDEA: by passing along an attribute called "time" and one or more of "think" "start" and "finish"
-  # =>      I can trigger calls to start= and finish=. is there a way to just call start and finish?
-  # => 
-  # => 
-  #
 
-  def init
-    started_at = thought_at if started?
-    finished_at = thought_at if done?
+  def self.initial_time_params state, time=Time.now
+    ret = {
+      thought_at: time
+    }
+    ret.merge!({ started_at: time }) if state != 'thought'
+    ret.merge!({ finished_at: time }) if state == 'finished'
+    ret
   end
 
-  def started?; [:thought, :active].include? state; end
-  def done?; state == :done; end
+  def started?; state != 'thought'; end
+  def done?; state == 'done'; end
 
   def start
+    return unless self.state == 'thought'
+
+    self.state = 'active'
+    self.eph_started_at = Time.now
+    self.started_at = self.eph_started_at if self.total_elapsed == 0
   end
 
-  def finish
+  def pause
+    return if self.state != 'active'
+
+    self.total_elapsed += (Time.now - self.eph_started_at)
+    self.state = 'thought'
   end
 
-  def when what=state.to_sym
-    if what == :thought
-      thought_at
-    elsif what == :active
-      started_at
-    elsif what == :done
-      finished_at
+  def do
+    return if self.state == 'done'
+
+    start unless started?
+
+    self.state = 'done'
+    self.finished_at = Time.now
+  end
+
+  def when what=self.state
+    if what == 'thought'
+      self.thought_at
+    elsif what == 'active'
+      self.started_at
+    elsif what == 'done'
+      self.finished_at
     else
       raise StandardError
     end

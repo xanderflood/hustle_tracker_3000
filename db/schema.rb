@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202041147) do
+ActiveRecord::Schema.define(version: 20170205235214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,16 @@ ActiveRecord::Schema.define(version: 20170202041147) do
     t.datetime "started_at"
     t.datetime "finished_at"
     t.integer  "points"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "hustle_id"
-    t.integer  "state",       default: 3
+    t.integer  "state",          default: 3
     t.datetime "thought_at"
+    t.float    "total_elapsed",  default: 0.0
+    t.datetime "eph_started_at"
+    t.integer  "roll_id"
     t.index ["hustle_id"], name: "index_deeds_on_hustle_id", using: :btree
+    t.index ["roll_id"], name: "index_deeds_on_roll_id", using: :btree
   end
 
   create_table "hustles", force: :cascade do |t|
@@ -36,6 +40,16 @@ ActiveRecord::Schema.define(version: 20170202041147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_hustles_on_user_id", using: :btree
+  end
+
+  create_table "rolls", force: :cascade do |t|
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "deadline"
+    t.boolean  "finished",   default: false
+    t.index ["user_id"], name: "index_rolls_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,5 +71,7 @@ ActiveRecord::Schema.define(version: 20170202041147) do
   end
 
   add_foreign_key "deeds", "hustles"
+  add_foreign_key "deeds", "rolls"
   add_foreign_key "hustles", "users"
+  add_foreign_key "rolls", "users"
 end
