@@ -2,7 +2,7 @@
   .col-xs-6
     = "started #{time_ago_in_words(hustle.created)}"
   .col-xs-6
-    = "#{number_to_human(hustle.deeds.count)} deeds done"
+    = "#{number_to_human(hustle.deeds.done.count)} deeds done"
 .row
   .col-xs-6
     = link_to 'view deeds', hustle

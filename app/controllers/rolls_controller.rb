@@ -1,5 +1,6 @@
 class RollsController < ApplicationController
-  before_action :set_roll, only: [:show, :edit, :update, :destroy]
+  before_action :set_roll, only: [:show, :edit, :update, :destroy, :add]
+  before_action :set_deed, only: [:add]
 
   # GET /rolls
   # GET /rolls.json
@@ -24,7 +25,15 @@ class RollsController < ApplicationController
   # POST /rolls
   # POST /rolls.json
   def create
-    @roll = Roll.new(roll_params)
+    @roll = Roll.new(
+      user: current_user,
+      name: params[:roll][:name],
+      deadline: DateTime.new(params[:roll]["deadline(1i)"].to_i,
+                             params[:roll]["deadline(2i)"].to_i,
+                             params[:roll]["deadline(3i)"].to_i,
+                             params[:roll]["deadline(4i)"].to_i,
+                             params[:roll]["deadline(5i)"].to_i)
+    )
 
     respond_to do |format|
       if @roll.save
@@ -51,6 +60,32 @@ class RollsController < ApplicationController
     end
   end
 
+  def add
+    @roll.deeds.push @deed
+    respond_to do |format|
+      if @roll.save
+        format.html { redirect_to @roll, notice: 'deed added to roll' }
+        format.json { render :show, status: :ok, location: @roll }
+      else
+        format.html { render :edit }
+        format.json { render json: @roll.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def finish
+    @roll.finish
+    respond_to do |format|
+      if @roll.save
+        format.html { redirect_to @roll, notice: 'roll finished!' }
+        format.json { render :show, status: :ok, location: @roll }
+      else
+        format.html { render :edit }
+        format.json { render json: @roll.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /rolls/1
   # DELETE /rolls/1.json
   def destroy
@@ -64,11 +99,16 @@ class RollsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_roll
-      @roll = Roll.find(params[:id])
+      @roll =  Roll.find(params[:roll_id].nil? ? params[:id] : params[:roll_id] )
     end
+
+    def set_deed
+      @deed = Deed.find(params[:deed_id])
+    end 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roll_params
-      params.fetch(:roll, {})
+      binding.pry
+      params.require(:roll)
     end
 end

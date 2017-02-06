@@ -7,11 +7,18 @@
 - @hustles.order(:modified).reverse.each do |hustle|
   = hustle_blob hustle
 
+%hr
+
+- @rolls.order(:created_at).reverse.each do |roll|
+  = roll_blob roll
+
 .row
-  .col-xs-4.text-center
+  .col-xs-3.text-center
     = link_to 'new hustle', new_hustle_path
-  .col-xs-4.text-center
+  .col-xs-3.text-center
+    = link_to 'new roll', new_roll_path
+  .col-xs-3.text-center
     %b
       = link_to 'timecharts', user_path(current_user)
-  .col-xs-4.text-center
+  .col-xs-.text-center
     = link_to 'sign out', destroy_user_session_path, :method => :delete

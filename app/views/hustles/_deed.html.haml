@@ -23,19 +23,17 @@
     - else
       = link_to 'do', deed_do_path(deed), :method => :post
   .col-xs-3.text-right
-    = link_to 'destroy', hustle_deed_path(deed), :method => :delete, :data => { :confirm => 'Are you sure?' }
+    = link_to 'destroy', hustle_deed_path(deed), :method => :delete, :data => { :confirm => 'are you sure?' }
 
 .btn-group
-  .btn-group
-    %button.btn.btn-default.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
-      Add to roll
-      %span.caret
+  %button.btn.btn-default.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
+    Add to roll
+    %span.caret
 
-    %ul.dropdown-menu
+  %ul.dropdown-menu
+    %li
+      %a{ href: '#' }
+        Add to new roll...
+    - current_user.rolls.each do |r|
       %li
-        %a{ href: '#'}
-          Add to new roll...
-      - current_user.rolls.each do |r|
-        %li
-          %a{ href: '#' }
-            = r.name
+        = link_to r.name, deed_roll_add_path(deed, r), method: :post

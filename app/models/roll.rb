@@ -3,4 +3,5 @@ class Roll < ApplicationRecord
   has_many :deeds
 
   #has_many :rolls?
+  def finish; self.finished = true; end
 end

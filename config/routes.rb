@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       post 'start'
       post 'pause'
       post 'do'
+
+      resources :rolls do
+        post 'add'
+      end
     end
   end
 

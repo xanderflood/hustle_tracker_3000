@@ -1,0 +1,13 @@
+.row
+  .col-xs-6
+    = "started #{time_ago_in_words(roll.created_at)}"
+  .col-xs-6
+    = "#{number_to_human(roll.deeds.done.count)} of #{number_to_human(roll.deeds.count)} deeds done"
+.row
+  .col-xs-6
+    = link_to 'view deeds', roll
+  .col-xs-6
+    = link_to 'destroy', roll, :method => :delete, :data => { :confirm => 'Are you sure?' }
+-# .row
+-#   .col-xs-12
+-#     = link_to 'do a deed', roll_deed_add_path(roll)
