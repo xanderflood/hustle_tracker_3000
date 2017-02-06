@@ -11,10 +11,12 @@ class RollsController < ApplicationController
   # GET /rolls/1
   # GET /rolls/1.json
   def show
-    @points_in_states = {}
-    @points_in_states.default = 0
+    points = {}
+    points.default = 0
 
-    @roll.deeds.each { |d| @points_in_states[d.state] += d.points }
+    @roll.deeds.each { |d| points[d.state] += d.points }
+
+    @points_in_states = points.map { |k,v| [k,v] }
   end
 
   # GET /rolls/new
@@ -112,7 +114,6 @@ class RollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roll_params
-      binding.pry
       params.require(:roll)
     end
 end

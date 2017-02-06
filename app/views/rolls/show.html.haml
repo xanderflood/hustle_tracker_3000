@@ -3,62 +3,60 @@
   thoughts = @roll.deeds.thought.order(:thought_at).to_a
   done = @roll.deeds.done.order(:finished_at).to_a
 
-.row
-  .col-md-4
-    .chartbox{ data: @chart_data.to_json }
-      = pie_chart @points_in_states, id: :timechart
-  .col-md-8
+.panel-group
+  .panel.panel-default
+    .panel-heading
+      .row
+        .col-xs-4
+          %b
+            = @roll.name
+            %a
+              .glyphicon.glyphicon-pencil
+        .col-xs-8.text-right
+          %small
+            = roll_description @roll
+
+.chartbox
+  = pie_chart @points_in_states
+
+%hr
+
+-# active deeds, first one out
+- active.each do |deed|
+  = deed_blob deed, true
+
+  %hr
+
+-#next, a collapsible panel full of ideas, which is open unless there are active deeds
+- if thoughts.any?
+  %a{ href: '#thoughts-list', 'data-toggle' => 'collapse' }
     .panel-group
       .panel.panel-default
-        .panel-heading
-          .row
-            .col-xs-4
-              %b
-                = @roll.name
-                %a
-                  .glyphicon.glyphicon-pencil
-            .col-xs-8.text-right
-              %small
-                = roll_description @roll
+        .row
+          .col-xs-6
+            = thoughts.count
+            thoughts
+          .col-xs-6.text-right
+            = thoughts.map(&:points).inject :+
+            points
+  #thoughts-list.collapse{ class: (active.empty? ? 'in' : '') }
+    = render partial: 'shared/deed_list', locals: { deeds: thoughts }
 
-    %hr
+%hr
 
-    -# active deeds, first one out
-    - active.each do |deed|
-      = deed_blob deed, true
+- if done.any?
+  %a{ href: '#done-list', 'data-toggle' => 'collapse' }
+    .panel-group
+      .panel.panel-default
+        .row
+          .col-xs-6
+            = done.count
+            done
+          .col-xs-6.text-right
+            = done.map(&:points).inject :+
+            points
+  #done-list.collapse
+    = render partial: 'shared/deed_list', locals: { deeds: done }
 
-      %hr
-
-    -#next, a collapsible panel full of ideas, which is open unless there are active deeds
-    - if thoughts.any?
-      %a{ href: '#thoughts-list', 'data-toggle' => 'collapse' }
-        .panel-group
-          .panel.panel-default
-            .row
-              .col-xs-6
-                = thoughts.count
-                thoughts
-              .col-xs-6.text-right
-                = thoughts.map(&:points).inject :+
-                points
-      #thoughts-list.collapse{ class: (active.empty? ? 'in' : '') }
-        = render partial: 'shared/deed_list', locals: { deeds: thoughts }
-
-    %hr
-
-    - if done.any?
-      %a{ href: '#done-list', 'data-toggle' => 'collapse' }
-        .panel-group
-          .panel.panel-default
-            .row
-              .col-xs-6
-                = done.count
-                done
-              .col-xs-6.text-right
-                = done.map(&:points).inject :+
-                points
-      #done-list.collapse
-        = render partial: 'shared/deed_list', locals: { deeds: done }
-
-    %p
-      = link_to 'Back', hustles_path
+%p
+  = link_to 'Back', hustles_path
