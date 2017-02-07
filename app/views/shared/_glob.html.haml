@@ -1,9 +1,9 @@
 -# needs "glob"
 
 :ruby
-  active = glob.deeds.active.order(:eph_started_at).to_a
-  ideas = glob.deeds.idea.order(:thought_at).to_a
-  done = glob.deeds.done.order(:finished_at).to_a
+  active = glob.active.order(:eph_started_at).to_a
+  ideas = glob.idea.order(:updated_at).reverse.to_a
+  done = glob.done.order(:finished_at).reverse.to_a
 
 -#next, a collapsible panel full of ideas, which is open unless there are active deeds
 - if ideas.any?

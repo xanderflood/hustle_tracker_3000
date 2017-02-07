@@ -9,6 +9,9 @@
 
 %hr
 
+%p
+  rolls
+
 - @rolls.order(:created_at).reverse.each do |roll|
   = roll_blob roll
 
