@@ -58,6 +58,6 @@ module ApplicationHelper
   end
 
   def roll_description roll
-    "#{number_to_human(roll.deeds.done.count)} of #{number_to_human(roll.deeds.count)} deeds done"
+    "#{roll.total_points} of #{roll.total_value} points"
   end
 end

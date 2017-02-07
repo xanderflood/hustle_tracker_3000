@@ -1,8 +1,3 @@
-:ruby
-  active = @hustle.deeds.active.order(:eph_started_at).to_a
-  ideas = @hustle.deeds.idea.order(:updated_at).reverse.to_a
-  done = @hustle.deeds.done.order(:finished_at).reverse.to_a
-
 .panel-group
   .panel.panel-default
     .panel-heading
@@ -20,42 +15,7 @@
 
 %hr
 
--# active deeds, first one out
-- active.each do |deed|
-  = deed_blob deed, true
-
-  %hr
-
--#next, a collapsible panel full of ideas, which is open unless there are active deeds
-- if ideas.any?
-  %a{ href: '#ideas-list', 'data-toggle' => 'collapse' }
-    .panel-group
-      .panel.panel-default
-        .row
-          .col-xs-6
-            = ideas.count
-            ideas
-          .col-xs-6.text-right
-            = ideas.map(&:points).inject :+
-            points
-  #ideas-list.collapse{ class: (active.empty? ? 'in' : '') }
-    = render partial: 'shared/deed_list', locals: { deeds: ideas }
-
-%hr
-
-- if done.any?
-  %a{ href: '#done-list', 'data-toggle' => 'collapse' }
-    .panel-group
-      .panel.panel-default
-        .row
-          .col-xs-6
-            = done.count
-            done
-          .col-xs-6.text-right
-            = done.map(&:points).inject :+
-            points
-  #done-list.collapse
-    = render partial: 'shared/deed_list', locals: { deeds: done }
+= render partial: 'shared/glob', locals: { glob: @hustle }
 
 %p
   = link_to 'Back', hustles_path

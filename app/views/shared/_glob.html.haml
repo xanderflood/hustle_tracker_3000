@@ -1,0 +1,37 @@
+-# needs "glob"
+
+:ruby
+  active = glob.deeds.active.order(:eph_started_at).to_a
+  ideas = glob.deeds.idea.order(:thought_at).to_a
+  done = glob.deeds.done.order(:finished_at).to_a
+
+-#next, a collapsible panel full of ideas, which is open unless there are active deeds
+- if ideas.any?
+  %a{ href: '#ideas-list', 'data-toggle' => 'collapse' }
+    .panel-group
+      .panel.panel-default
+        .row
+          .col-xs-6
+            = ideas.count
+            ideas
+          .col-xs-6.text-right
+            = ideas.map(&:points).inject :+
+            points
+  #ideas-list.collapse{ class: (active.empty? ? 'in' : '') }
+    = render partial: 'shared/deed_list', locals: { deeds: ideas }
+
+%hr
+
+- if done.any?
+  %a{ href: '#done-list', 'data-toggle' => 'collapse' }
+    .panel-group
+      .panel.panel-default
+        .row
+          .col-xs-6
+            = done.count
+            done
+          .col-xs-6.text-right
+            = done.map(&:points).inject :+
+            points
+  #done-list.collapse
+    = render partial: 'shared/deed_list', locals: { deeds: done }
