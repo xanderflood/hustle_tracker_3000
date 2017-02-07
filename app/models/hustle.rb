@@ -3,7 +3,7 @@ class Hustle < ApplicationRecord
   has_many :deeds
 
   def active; deeds.active; end
-  def thought; deeds.thought; end
+  def idea; deeds.idea; end
   def done; deeds.done; end
 
   def total_points

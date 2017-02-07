@@ -8,7 +8,7 @@
 
   .field
     = f.label :desc, 'this is'
-    = f.select :state, options_for_select([['an idea', 'thought'], ['what i\'m doing', 'active'], ['something i did', 'done']])
+    = f.select :state, options_for_select([['an idea', 'idea'], ['what i\'m doing', 'active'], ['something i did', 'done']])
   .field
     = f.label :hustle
     %input{ type: :text, disabled: :disabled, value: @hustle.name }

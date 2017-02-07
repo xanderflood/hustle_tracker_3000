@@ -9,13 +9,13 @@ class Deed < ApplicationRecord
 
   belongs_to :hustle
   
-  enum state: [:thought, :active, :done]
+  enum state: [:idea, :active, :done]
 
   validates :desc, presence: { message: "what did you do?" }
   validates :points, presence: { message: "how long did it take?" }
   validates :state, presence: { message: "is it done?" }
 
-  validates :thought_at, presence: { message: "missing thought time" }
+  validates :thought_at, presence: { message: "missing idea time" }
   validates :started_at, presence: { message: "missing start time" }, if: :started?
   validates :finished_at, presence: { message: "missing start time" }, if: :done?
 
@@ -26,16 +26,16 @@ class Deed < ApplicationRecord
     ret = {
       thought_at: time
     }
-    ret.merge!({ started_at: time }) if state != 'thought'
+    ret.merge!({ started_at: time }) if state != 'idea'
     ret.merge!({ finished_at: time }) if state == 'finished'
     ret
   end
 
-  def started?; state != 'thought'; end
+  def started?; state != 'idea'; end
   def done?; state == 'done'; end
 
   def start
-    return unless self.state == 'thought'
+    return unless self.state == 'idea'
 
     self.state = 'active'
     self.eph_started_at = Time.now
@@ -46,7 +46,7 @@ class Deed < ApplicationRecord
     return if self.state != 'active'
 
     self.total_elapsed += (Time.now - self.eph_started_at)
-    self.state = 'thought'
+    self.state = 'idea'
   end
 
   def do
@@ -59,7 +59,7 @@ class Deed < ApplicationRecord
   end
 
   def when what=self.state
-    if what == 'thought'
+    if what == 'idea'
       self.thought_at
     elsif what == 'active'
       self.started_at

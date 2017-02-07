@@ -1,6 +1,6 @@
 :ruby
   active = @roll.deeds.active.order(:eph_started_at).to_a
-  thoughts = @roll.deeds.thought.order(:thought_at).to_a
+  ideas = @roll.deeds.idea.order(:thought_at).to_a
   done = @roll.deeds.done.order(:finished_at).to_a
 
 .panel-group
@@ -28,19 +28,19 @@
   %hr
 
 -#next, a collapsible panel full of ideas, which is open unless there are active deeds
-- if thoughts.any?
-  %a{ href: '#thoughts-list', 'data-toggle' => 'collapse' }
+- if ideas.any?
+  %a{ href: '#ideas-list', 'data-toggle' => 'collapse' }
     .panel-group
       .panel.panel-default
         .row
           .col-xs-6
-            = thoughts.count
-            thoughts
+            = ideas.count
+            ideas
           .col-xs-6.text-right
-            = thoughts.map(&:points).inject :+
+            = ideas.map(&:points).inject :+
             points
-  #thoughts-list.collapse{ class: (active.empty? ? 'in' : '') }
-    = render partial: 'shared/deed_list', locals: { deeds: thoughts }
+  #ideas-list.collapse{ class: (active.empty? ? 'in' : '') }
+    = render partial: 'shared/deed_list', locals: { deeds: ideas }
 
 %hr
 

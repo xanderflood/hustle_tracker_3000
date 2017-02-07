@@ -1,12 +1,12 @@
 module ApplicationHelper
   STATE_TERMS = {
-    thought: :thought,
+    idea: :idea,
     active: :started,
     done: :finished
   }
 
   STATE_ORDER = {
-    thought: 1,
+    idea: 1,
     active: 0,
     done: 2
   }
@@ -49,7 +49,7 @@ module ApplicationHelper
 
   def ordered_deeds hustle
     ret = hustle.deeds.active.sort { |a,b| a.updated_at <=> b.updated_at }.reverse
-    ret += hustle.deeds.thought.sort { |a,b| a.updated_at <=> b.updated_at }.reverse
+    ret += hustle.deeds.idea.sort { |a,b| a.updated_at <=> b.updated_at }.reverse
     ret += hustle.deeds.done.sort { |a,b| a.updated_at <=> b.updated_at }.reverse
   end
 

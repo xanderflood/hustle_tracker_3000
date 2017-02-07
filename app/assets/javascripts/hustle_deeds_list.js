@@ -25,7 +25,7 @@ window.hustle_deed_list = (function() {
   };
 
   var _filter = function(data) {
-    if ((data('state') == 'thought') && visible['idea']) return true;
+    if ((data('state') == 'idea') && visible['idea']) return true;
     if ((data('state') == 'started') && visible['started']) return true;
     if ((data('state') == 'done') && visible['done']) return true;
     return false;
