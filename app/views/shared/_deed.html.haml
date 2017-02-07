@@ -23,7 +23,7 @@
     - else
       = link_to 'do', deed_do_path(deed), :method => :post
   .col-xs-3.text-right
-    = link_to 'destroy', hustle_deed_path(deed), :method => :delete, :data => { :confirm => 'are you sure?' }
+    = link_to 'delete', hustle_deed_path(deed.hustle, deed), :method => :delete, :data => { :confirm => 'are you sure?' }
 
 .btn-group
   %button.btn.btn-default.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }

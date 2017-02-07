@@ -59,7 +59,7 @@ class DeedsController < ApplicationController
         format.html { redirect_to @hustle, notice: 'deed started' }
         format.json { render :show, status: :created, location: @deed }
       else
-        format.html { render :new }
+        format.html { redirect_to :back }
         format.json { render json: @deed.errors, status: :unprocessable_entity }
       end
     end

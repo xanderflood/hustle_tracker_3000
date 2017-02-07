@@ -4,6 +4,12 @@
   active = glob.active.order(:eph_started_at).to_a
   ideas = glob.idea.order(:updated_at).reverse.to_a
   done = glob.done.order(:finished_at).reverse.to_a
+  # active deeds, first one out
+
+- active.each do |deed|
+  = deed_blob deed, true
+
+  %hr
 
 -#next, a collapsible panel full of ideas, which is open unless there are active deeds
 - if ideas.any?

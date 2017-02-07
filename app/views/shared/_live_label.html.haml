@@ -1,12 +1,13 @@
--# requires 'model' 'attr'
+-# requires 'model' 'attr' 'url'
 
 .live-label-group
-  %table
-    %tr
-      %td
-        %label{ for: "name" }
-          Saghir
-        %input.edit-input{ type: "text", hidden: "hidden" }
-      %td
-        %a.edit
-          .glyphicon.glyphicon-pencil
+  = form_for model, url: url do |f|
+    %table
+      %tr
+        %td
+          %label{ for: "name" }
+            = model.send attrib
+          = f.text_field attrib
+        %td
+          %a.edit
+            .glyphicon.glyphicon-pencil

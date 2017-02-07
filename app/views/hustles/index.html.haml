@@ -4,7 +4,7 @@
 %h3.text-right
   = current_user.name
 
-- @hustles.order(:modified).reverse.each do |hustle|
+- @hustles.order(:updated_at).reverse.each do |hustle|
   = hustle_blob hustle
 
 %hr
@@ -12,7 +12,7 @@
 %p
   rolls
 
-- @rolls.order(:created_at).reverse.each do |roll|
+- @rolls.order(:updated_at).reverse.each do |roll|
   = roll_blob roll
 
 .row
