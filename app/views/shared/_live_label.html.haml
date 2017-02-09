@@ -1,13 +1,15 @@
 -# requires 'model' 'attr' 'url'
+:ruby
+  data = { id: model.id }
 
-.live-label-group
-  = form_for model, url: url do |f|
-    %table
-      %tr
-        %td
-          %label{ for: "name" }
-            = model.send attrib
-          = f.text_field attrib
-        %td
-          %a.edit
-            .glyphicon.glyphicon-pencil
+.live-label-group{ 'data-target': url, 'data-id': model.id }
+  %table
+    %tr
+      %td
+        %label.live-label
+          = model.send attrib
+        .wrap
+          %input.autoresize.live-label{ type: 'text', value: model.send(attrib), spellcheck: false }
+      %td           
+        %a.live-label.btn.btn-default{ remote: true, data: { behavior: 'ajax-spin', target: '.spinner' } }
+          .fa.fa-pencil

@@ -1,0 +1,20 @@
+label.live-label {
+  margin-left: 2px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+p.live-label {
+  margin: 0;
+}
+
+input.live-label {
+  display: none;
+}
+
+.live-label.btn {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 7px;
+  padding-right: 7px;
+}

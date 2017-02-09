@@ -1,0 +1,22 @@
+{
+  "name": "hustle_tracker_3000",
+  "homepage": "https://github.com/xanderflood/hustle_tracker_3000",
+  "authors": [
+    "xanderflood <xander.t.flood@gmail.com>"
+  ],
+  "description": "track ur hussles",
+  "dependencies": {
+    "font-awesome-animation": "~0.0.10"
+  },
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ]
+}

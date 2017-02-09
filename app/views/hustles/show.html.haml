@@ -3,7 +3,6 @@
     .panel-heading
       .row
         .col-xs-4
-          = render partial: 'shared/live_label', locals: { model: @hustle, attrib: :name, url: hustle_rename_path(@hustle) }
           -# %b
           -#   = @hustle.name
           -#   %a
@@ -14,6 +13,7 @@
           %small
             = "#{@hustle.total_points} points"
 
+= render partial: 'shared/live_label', locals: { model: @hustle, attrib: :name, url: hustle_rename_path(@hustle) }
 %hr
 
 = render partial: 'shared/glob', locals: { glob: @hustle }

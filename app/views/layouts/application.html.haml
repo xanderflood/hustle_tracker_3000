@@ -13,8 +13,8 @@
   %body
     .container
       .row
-        .col-lg-3.col-xs-0
-        .col-lg-6.col-xs-12.main-stripe
+        .col-lg-2.col-xs-0
+        .col-lg-8.col-xs-12.main-stripe
           - if flash[:alert].present?
             .panel-group
               .panel.panel-default
@@ -27,7 +27,7 @@
                 .panel-heading
                   = flash[:notice]
           = yield
-        .col-lg-3.col-xs-0
+        .col-lg-2.col-xs-0
       %hr
       %footer
         %small.text-center{ color: :gray }

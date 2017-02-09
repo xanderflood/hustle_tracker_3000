@@ -1,28 +1,58 @@
 $(document).ready(function() {
-  $('input[type="text"]').hide();
-
-  $('a.edit').click(function () {
+  //
+  // setup the pencil glyphicon link
+  //
+  $('a.live-label').click(function () {
     var dad = $(this).parent().parent();
     dad.find('label').hide();
-    dad.find('input[type="text"]').show().focus();
+
+    var input = dad.find('input.live-label');
+    input.show().focus().val(input.val()); //set focus to end
+    LiveLabel.autoResize(input);
   });
 
-  $('input[type="text"]').focusout(function() {
+  var _submitUpdate = function(_this) { 
+    context = $(_this).closest('.live-label-group');
 
-    //
-    // (first, set up the route)
-    //
-    // send off an AJAX request which:
-    //
-    //  (1) reloads the flash messages on error
-    //
-    //  (2) does the same on successs
-    //
-    //  (3) also does the below on success:
-    //
+    var data = {
+      id: context.data('id'),
+      name: $(_this).val()
+    }
 
-    var dad = $(this).parent();
-    $(this).hide();
-    dad.find('label').show();
+    $.post({
+      url: context.data('target'),
+      data: data,
+      beforeSend: function() {
+        context.find('.fa')
+            .removeClass('fa-pencil')
+            .addClass('fa-spinner faa-spin animated');
+      }
+    })
+
+    .done(function() {
+      context.find('.fa')
+       .removeClass('fa-spinner faa-spin animated')
+       .addClass('fa-pencil');
+    })
+
+    .success(function(jqxhr, status, errorThrown) {
+      context.find('label.live-label').text(jqxhr.name).show();
+      context.find('input.live-label').hide();
+    })
+
+    .error(function(jqxhr, status, errorThrown) {
+      context.find('label.live-label').text(jqxhr.name);
+
+      //trigger some kind of error
+    });
+  };
+
+  //
+  // unfocusing the livelabel
+  //
+  $('input.live-label').focusout(function() { _submitUpdate(this) });
+  $('input.live-label').keyup(function (event) {
+    if (event.keyCode == 13)
+      _submitUpdate(event.target);
   });
 });
