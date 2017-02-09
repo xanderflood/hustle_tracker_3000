@@ -3,10 +3,11 @@
     .panel-heading
       .row
         .col-xs-4
-          %b
-            = @hustle.name
-            %a
-              .glyphicon.glyphicon-pencil
+          = render partial: 'shared/live_label', locals: { model: @hustle, attrib: :name, url: hustle_rename_path(@hustle) }
+          -# %b
+          -#   = @hustle.name
+          -#   %a
+          -#     .glyphicon.glyphicon-pencil
         .col-xs-4.text-center
           = link_to 'do a deed', new_hustle_deed_path(@hustle)
         .col-xs-4.text-right

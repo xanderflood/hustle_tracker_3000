@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     root to: "hustles#index"
 
     resources :hustles, only: [:index, :new, :create, :show, :destroy] do
-      resources :deeds, only: [:new, :create, :show, :destroy] do
-        #post "new", to: :create, as: :new
-      end
+      resources :deeds, only: [:new, :create, :show, :destroy]
+
+      post 'rename'
     end
 
     resources :rolls, only: [:index, :new, :create, :show] do
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       post 'pause'
       post 'do'
 
-      resources :rolls do
+      resources :rolls, only: [] do
         post 'add'
       end
     end

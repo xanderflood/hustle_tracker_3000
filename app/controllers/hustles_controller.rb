@@ -1,5 +1,5 @@
 class HustlesController < ApplicationController
-  before_action :set_hustle, only: [:show, :edit, :update, :destroy]
+  before_action :set_hustle, only: [:show, :edit, :update, :destroy, :rename]
 
   # GET /hustles
   # GET /hustles.json
@@ -38,6 +38,17 @@ class HustlesController < ApplicationController
         format.json { render :show, status: :created, location: @hustle }
       else
         format.html { render :new }
+        format.json { render json: @hustle.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def rename
+    @hustle.name = hustle_params[:name]
+    respond_to do |format|
+      if @hustle.save
+        format.json { render :json, status: :ok, location: @hustle }
+      else
         format.json { render json: @hustle.errors, status: :unprocessable_entity }
       end
     end
