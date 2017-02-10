@@ -2,15 +2,20 @@ $(document).ready(function() {
   //
   // setup the pencil glyphicon link
   //
-  $('a.live-label').click(function () {
+  var _startEditing = function() {
     var dad = $(this).parent().parent();
     dad.find('label').hide();
 
     var input = dad.find('input.live-label');
     input.show().focus().val(input.val()); //set focus to end
     LiveLabel.autoResize(input);
-  });
+  };
+  $('a.live-label').click(_startEditing);
+  $('label.live-label').click(_startEditing);
 
+  //
+  // unfocusing the livelabel
+  //
   var _submitUpdate = function(_this) { 
     context = $(_this).closest('.live-label-group');
 
@@ -46,13 +51,20 @@ $(document).ready(function() {
       //trigger some kind of error
     });
   };
-
-  //
-  // unfocusing the livelabel
-  //
   $('input.live-label').focusout(function() { _submitUpdate(this) });
   $('input.live-label').keyup(function (event) {
     if (event.keyCode == 13)
       _submitUpdate(event.target);
+  });
+
+  //
+  // hoverstuff
+  //
+  // $('label.live-label').mousover(function(event) {
+  //   $(this).
+  // });
+
+  $('a.live-label').mousover(function(event) {
+    $(this).closest('.live-label-group').find('label').mouseover();
   });
 });
