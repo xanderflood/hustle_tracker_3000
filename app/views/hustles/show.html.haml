@@ -13,7 +13,7 @@
           %small
             = "#{@hustle.total_points} points"
 
-= render partial: 'shared/live_label', locals: { model: @hustle, attrib: :name, url: hustle_rename_path(@hustle) }
+= render partial: 'shared/live_label', locals: { model: @hustle, attrib: :name, url: hustle_rename_path(@hustle), options: { spellcheck: false } }
 %hr
 
 = render partial: 'shared/glob', locals: { glob: @hustle }

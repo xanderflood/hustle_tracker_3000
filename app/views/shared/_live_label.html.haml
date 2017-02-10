@@ -1,5 +1,6 @@
 -# requires 'model' 'attr' 'url'
 :ruby
+  options = {} unless local_assigns[:options].present?
   data = { id: model.id }
 
 .live-label-group{ 'data-target': url, 'data-id': model.id }
@@ -9,7 +10,7 @@
         %label.live-label
           = model.send attrib
         .wrap
-          %input.autoresize.live-label{ type: 'text', value: model.send(attrib), spellcheck: false }
+          %input.autoresize.live-label{ type: 'text', value: model.send(attrib), **options }
       %td           
         %a.live-label.btn.btn-default{ remote: true, data: { behavior: 'ajax-spin', target: '.spinner' } }
           .fa.fa-pencil

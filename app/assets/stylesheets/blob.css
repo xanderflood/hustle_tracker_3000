@@ -21,13 +21,13 @@ a:active {
 }
 
 .panel-heading.deed.idea {
-  background-color: #44AA44;
+  background-color: #99dd99;
 }
 
 .panel-heading.deed.active {
-  background-color: #AAAA00;
+  background-color: #DDDD77;
 }
 
 .panel-heading.deed.done {
+  background-color: #ddd;
 }
-
