@@ -10,7 +10,7 @@
         %label.live-label
           = model.send attrib
         .wrap
-          %input.autoresize.live-label{ type: 'text', value: model.send(attrib), **options }
+          = tag :input, class: 'autoresize live-label', type: 'text', value: model.send(attrib), **options
       %td           
         %a.live-label.btn.btn-default{ remote: true, data: { behavior: 'ajax-spin', target: '.spinner' } }
           .fa.fa-pencil
