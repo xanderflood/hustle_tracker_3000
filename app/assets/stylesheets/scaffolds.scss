@@ -23,14 +23,9 @@ pre {
 a {
   color: #000;
 
-  // &:visited {
-  //   color: #666;
-  // }
-
-  // &:hover {
-  //   color: #fff;
-  //   background-color: #FFF;
-  // }
+  &:link {
+    text-decoration: underline;
+  }
 }
 
 th {
@@ -86,4 +81,17 @@ div {
 
 label {
   display: block;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.btn {
+  padding: 6px;
+}
+
+a:hover {
+  text-decoration: none;
 }

@@ -56,15 +56,4 @@ $(document).ready(function() {
     if (event.keyCode == 13)
       _submitUpdate(event.target);
   });
-
-  //
-  // hoverstuff
-  //
-  // $('label.live-label').mousover(function(event) {
-  //   $(this).
-  // });
-
-  $('a.live-label').mousover(function(event) {
-    $(this).closest('.live-label-group').find('label').mouseover();
-  });
 });

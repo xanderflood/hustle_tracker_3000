@@ -20,6 +20,25 @@ a:active {
   color: #666;
 }
 
+.panel-heading.deed {
+  padding: 0px;
+}
+
+.panel-heading.deed .fa.fa-chevron-down {
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.panel-heading.deed .fa.fa-chevron-right {
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+.panel-heading.deed .close-col {
+  color: #CC88FF
+}
+
+
 .panel-heading.deed.idea {
   background-color: #99dd99;
 }

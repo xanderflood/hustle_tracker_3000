@@ -1,0 +1,48 @@
+:ruby
+  # start by defining enumerating the font-awesome actions to display
+  actions = if deed.state == :idea
+  elsif deed.state == :active
+    [:play]
+  else
+    []
+  end
+
+.row
+  %span
+    .btn.open
+      .fa{ class: (open ? 'fa-chevron-down' : 'fa-chevron-right') }
+    .btn-group
+      .btn.btn-default.little
+        .fa.fa-pause{ color: '#FF0000' }
+      .btn.btn-default.little
+        .fa.fa-play
+      .btn.btn-default.little
+        .fa.fa-fast-forward
+  %span{ style: 'margin-left: 10%;' }
+    = truncate deed.desc
+  .right{ style: 'float: right;' }
+    %span
+      = "#{deed.points} points"
+    %span.close-col
+      .btn
+        .fa.fa-close
+
+-# .row
+-#   .col-xs-3
+-#     .btn
+-#       .fa{ class: (open ? 'fa-chevron-down' : 'fa-chevrom-up') }
+-#     .btn-group
+-#       .btn.btn-default.little8
+-#         .fa.fa-pause{ color: '#FF0000' }
+-#       .btn.btn-default.little
+-#         .fa.fa-play
+-#       .btn.btn-default.little
+-#         .fa.fa-fast-forward
+-#   .col-xs-6.text-col
+-#     = truncate deed.desc
+-#   .col-xs-1.text-right.text-col
+-#     = "#{deed.points}"
+-#   .col-xs-2.text-right.close-col
+-#     .btn-group
+-#       .btn.btn-default.little
+-#         .fa.fa-close

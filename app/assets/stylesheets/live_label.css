@@ -8,14 +8,10 @@ label.live-label {
   padding-left: 2px;
   padding-right: 2px;
   border: 1px solid white;
-
-  /*&:hover {
-    border: 1px dotted lightgray;
-  }*/
 }
 
 label.live-label:hover {
-  border: 1px dotted lightgray;
+  border: 1px dotted #555555;
 }
 
 p.live-label {
@@ -25,9 +21,11 @@ input.live-label {
   display: none;
 }
 
-.live-label.btn {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 7px;
-  padding-right: 7px;
+.btn.little {
+  color: #CCC;
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
 }

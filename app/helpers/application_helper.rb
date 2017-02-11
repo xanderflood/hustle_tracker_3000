@@ -15,8 +15,8 @@ module ApplicationHelper
     return render partial: 'shared/blob', locals: {
       panel_id: "hustle_blob_#{hustle.id}",
       head_left: truncate(hustle.name),
-      head_center: time_ago_in_words(hustle.modified),
-      head_right: "#{hustle.total_points}",
+      head_center: "#{time_ago_in_words(hustle.modified)} ago",
+      head_right: "#{hustle.total_points} points",
       body: 'shared/hustle',
       body_locals: { hustle: hustle }
     }
@@ -25,8 +25,10 @@ module ApplicationHelper
   def deed_blob deed, open=false
     return render partial: 'shared/blob', locals: {
       head_class: "deed #{deed.state}",
+      head: 'shared/hustle_header',
+      head_locals: { deed: deed },
       panel_id: "deed_blob_#{deed.id}",
-      head_left: truncate(deed.desc),
+      # head_left: truncate(deed.desc..//),
       head_center: state_description(deed),
       head_right: "#{deed.points}",
       body: 'shared/deed',

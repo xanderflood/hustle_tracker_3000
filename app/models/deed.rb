@@ -7,7 +7,7 @@ class Deed < ApplicationRecord
     self.finished_at ||= Time.now if done?
   end
 
-  belongs_to :hustle
+  belongs_to :hustle, touch: true
   
   enum state: [:idea, :active, :done]
 
@@ -27,6 +27,7 @@ class Deed < ApplicationRecord
       thought_at: time
     }
     ret.merge!({ started_at: time }) if state != 'idea'
+    ret.merge!({ eph_started_at: time }) if state == 'active'
     ret.merge!({ finished_at: time }) if state == 'finished'
     ret
   end
