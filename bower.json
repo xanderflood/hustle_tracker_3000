@@ -6,7 +6,8 @@
   ],
   "description": "track ur hussles",
   "dependencies": {
-    "font-awesome-animation": "~0.0.10"
+    "font-awesome-animation": "~0.0.10",
+    "jstree": "3.3.3"
   },
   "main": "",
   "license": "MIT",

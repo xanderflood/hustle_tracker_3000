@@ -1,4 +1,4 @@
-/* background coloring for blobs */
+ background coloring for blobs */
 .panel-heading, .panel-footer {
   font-weight: bold;
   background-color: rgb(190,190,190);
@@ -20,24 +20,33 @@ a:active {
   color: #666;
 }
 
-.panel-heading.deed {
+.panel-heading {
   padding: 0px;
 }
 
+.panel-heading.hustle .vert-center {
+  padding: 0px;
+  padding-top: 6px;
+  padding-right: 6px;
+}
+
 .panel-heading.deed .fa.fa-chevron-down {
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 3px;
+  padding-left: 3px;
 }
 
 .panel-heading.deed .fa.fa-chevron-right {
-  padding-right: 6px;
-  padding-left: 6px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .panel-heading.deed .close-col {
-  color: #CC88FF
+  color: #CC88FF;
 }
 
+.panel-heading.hustle {
+  padding: 5px;
+}
 
 .panel-heading.deed.idea {
   background-color: #99dd99;
@@ -49,4 +58,9 @@ a:active {
 
 .panel-heading.deed.done {
   background-color: #ddd;
+}
+
+.blob-link {
+  cursor: pointer;
+  text-weight: bold;
 }

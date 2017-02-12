@@ -13,6 +13,7 @@ module ApplicationHelper
 
   def hustle_blob hustle
     return render partial: 'shared/blob', locals: {
+      head_locals: { hustle: hustle },
       panel_id: "hustle_blob_#{hustle.id}",
       head_left: truncate(hustle.name),
       head_center: "#{time_ago_in_words(hustle.modified)} ago",
@@ -21,16 +22,13 @@ module ApplicationHelper
       body_locals: { hustle: hustle }
     }
   end
-
+ 
   def deed_blob deed, open=false
     return render partial: 'shared/blob', locals: {
       head_class: "deed #{deed.state}",
-      head: 'shared/hustle_header',
+      head: 'shared/deed_header',
       head_locals: { deed: deed },
       panel_id: "deed_blob_#{deed.id}",
-      # head_left: truncate(deed.desc..//),
-      head_center: state_description(deed),
-      head_right: "#{deed.points}",
       body: 'shared/deed',
       body_locals: { deed: deed },
       open: open
@@ -61,5 +59,13 @@ module ApplicationHelper
 
   def roll_description roll
     "#{roll.total_points} of #{roll.total_value} points"
+  end
+
+  def live_label model, attrib, url
+    return render partial: 'shared/live_label', locals: {
+      model: model,
+      attrib: attrib,
+      url: url
+    }
   end
 end

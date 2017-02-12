@@ -12,7 +12,7 @@
 
 .panel-group
   .panel.panel-default
-    %a.blob-link{ 'data-toggle' => "collapse", href: "#collapse#{panel_id}" }
+    .blob-link{ 'data-toggle' => "collapse", href: "#collapse#{panel_id}" }
       .panel-heading{ class: head_class }
         - if local_assigns[:head].present?
           = render partial: head, locals: { open: open }.merge!(head_locals)

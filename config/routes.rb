@@ -8,16 +8,16 @@ Rails.application.routes.draw do
     root to: "hustles#index"
 
     resources :hustles, only: [:index, :new, :create, :show, :destroy] do
-      resources :deeds, only: [:new, :create, :show, :destroy]
+      resources :deeds, only: [:new, :create]
 
       post 'rename'
     end
 
-    resources :rolls, only: [:index, :new, :create, :show] do
+    resources :rolls, only: [:index, :new, :create, :show, :destroy] do
       post 'finish'
     end
 
-    resources :deeds do
+    resources :deeds, only: [:destroy] do
       post 'start'
       post 'pause'
       post 'do'

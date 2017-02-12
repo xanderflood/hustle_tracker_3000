@@ -8,10 +8,10 @@ class DeedsController < ApplicationController
     @deeds = Deed.all
   end
 
-  # GET /deeds/1
-  # GET /deeds/1.json
-  def show
-  end
+  # # GET /deeds/1
+  # # GET /deeds/1.json
+  # def show
+  # end
 
   # GET /deeds/new
   def new
@@ -96,6 +96,7 @@ class DeedsController < ApplicationController
   def destroy
     @deed.destroy
     respond_to do |format|
+      binding.pry
       format.html { redirect_to @hustle, notice: 'Deed was successfully destroyed.' }
       format.json { head :no_content }
     end

@@ -1,0 +1,43 @@
+:ruby
+  # start by defining enumerating the font-awesome actions to display
+  actions = if deed.state == :idea
+    [:start, :finish]
+  elsif deed.state == :active
+    [:pause, :finish]
+  else
+    []
+  end
+
+  action_config = [
+    {
+      icon: 'fa-pause',
+      tooltip: 'pause',
+      action: deed_pause_path(deed)
+    },
+    {
+      icon: 'fa-play',
+      tooltip: 'start',
+      action: deed_start_path(deed)
+    },
+    {
+      icon: 'fa-fast-forward',
+      tooltip: 'finish',
+      action: deed_do_path(deed)
+    }
+  ]
+
+%span
+  .btn.open
+    .fa.chevron{ class: (open ? 'fa-chevron-down' : 'fa-chevron-right') }
+  .btn-group
+    - action_config.each do |c|
+      .btn.btn-default.little.panel-btn.post-btn.action-btn{ title: c[:tooltip], data: { method: :post, toggle: 'tooltip', url: c[:action] }, href: c[:actions] }
+        .fa{ class: c[:icon] }
+%span{ style: 'margin-left: 10%;' }
+  = truncate deed.desc
+.right{ style: 'float: right;' }
+  %span
+    = "#{deed.points} points"
+  %span.close-col
+    .btn.action-btn{ data: { method: :delete, url: deed_path(deed), confirm: 'are you sure?' }, rel: 'nofollow' }
+      .fa.fa-close.panel-btn
