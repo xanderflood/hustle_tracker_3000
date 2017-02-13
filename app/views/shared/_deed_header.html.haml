@@ -11,27 +11,49 @@
   action_config = [
     {
       icon: 'fa-pause',
-      tooltip: 'pause',
-      action: deed_pause_path(deed)
+      tooltop: 'pause',
+      data: {
+        method: :post,
+        toggle: 'tooltip',
+        url: deed_pause_path(deed, format: :json),
+        success: 'pause'
+      }
     },
     {
       icon: 'fa-play',
       tooltip: 'start',
-      action: deed_start_path(deed)
+      data: {
+        method: :post,
+        toggle: 'tooltip',
+        url: deed_start_path(deed, format: :json),
+        success: 'start'
+      }
     },
     {
       icon: 'fa-fast-forward',
       tooltip: 'finish',
-      action: deed_do_path(deed)
+      data: {
+        method: :post,
+        toggle: 'tooltip',
+        url: deed_do_path(deed, format: :json),
+        success: 'finish'
+      }
     }
   ]
+  delete_data = {
+    method: :delete,
+    toggle: 'tooltip',
+    confirm: 'are you sure?',
+    url: deed_path(deed, format: :json),
+    success: 'delete'
+  }
 
 %span
   .btn.open
     .fa.chevron{ class: (open ? 'fa-chevron-down' : 'fa-chevron-right') }
   .btn-group
     - action_config.each do |c|
-      .btn.btn-default.little.panel-btn.post-btn.action-btn{ title: c[:tooltip], data: { method: :post, toggle: 'tooltip', url: c[:action] }, href: c[:actions] }
+      .btn.btn-default.little.panel-btn.post-btn.action-btn{ title: c[:tooltip], data: c[:data] }
         .fa{ class: c[:icon] }
 %span{ style: 'margin-left: 10%;' }
   = truncate deed.desc
@@ -39,5 +61,5 @@
   %span
     = "#{deed.points} points"
   %span.close-col
-    .btn.action-btn{ data: { method: :delete, url: deed_path(deed), confirm: 'are you sure?' }, rel: 'nofollow' }
+    .btn.action-btn{ data: delete_data, rel: 'nofollow' }
       .fa.fa-close.panel-btn

@@ -16,14 +16,20 @@ $(function() {
   //
   // Posting the action-buttons
   //
-  var _action = function(context, url, method) {
+  var _action = function(context, url, method, success, obj) {
+    if (success == 'delete' && !confirm("are you sure?")) {
+      event.stopPropagation();
+      return;
+    }
+
     var chevron = context.find('.fa.chevron');
-    var open = chevron.hasClass('fa-chevron-down');
-    var chevClass = (open ? 'fa-chevron-down' : 'fa-chevron-right' )
+    var isOpen = chevron.hasClass('fa-chevron-down');
+    var chevClass = (isOpen ? 'fa-chevron-down' : 'fa-chevron-right' );
 
     $.ajax({
       method: method,
       url: url,
+      data: [],
       beforeSend: function() {
         chevron
           .removeClass(chevClass)
@@ -38,22 +44,29 @@ $(function() {
         chevron
           .fadeOut(200, function() {
             _chevron
-              .removeClass('fa-close')
+              .removeClass('fa-spinner faa-spin animated')
               .addClass(_chevClass)
               .fadeIn();
           });
       },
       success:  function( data, status, jqxhr ) {
         chevron
-          .addClass('fa-close')
-          .removeClass('fa-chevron-right')
+          .removeClass('fa-spinner faa-spin animated')
+          .addClass(chevClass)
           .css('color: #FF0000');
+
+        globActionCallbacks[success](context);
       }
     });
   };
 
   $('.action-btn').click(function (event) {
-    // debugger;
-    _action($(this).closest('.panel-heading'), $(this).data('url'), $(this).data('method'));
+    _action(
+      $(this).closest('.panel-heading'),
+      $(this).data('url'),
+      $(this).data('method'),
+      $(this).data('success')
+    );
+    event.stopPropagation();
   });
 });

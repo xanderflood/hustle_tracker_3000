@@ -26,8 +26,7 @@ class DeedsController < ApplicationController
   # POST /deeds.json
   def create
     @deed = @hustle.deeds.new(deed_params)
-
-    respond_to do |format| 
+    respond_to do |format|
      if @deed.save
         format.html { redirect_to @hustle, notice: 'deed created' }
         format.json { render :show, status: :created, location: @deed }
@@ -56,8 +55,8 @@ class DeedsController < ApplicationController
     @deed.start
     respond_to do |format|
       if @deed.save
-        format.html { redirect_to @hustle, notice: 'deed started' }
-        format.json { render :show, status: :created, location: @deed }
+        format.html { redirect_to :back, notice: 'deed started' }
+        format.json { render json: {}, status: :created, location: @deed }
       else
         format.html { redirect_to :back }
         format.json { render json: @deed.errors, status: :unprocessable_entity }
@@ -69,8 +68,8 @@ class DeedsController < ApplicationController
     @deed.pause
     respond_to do |format|
       if @deed.save
-        format.html { redirect_to @hustle, notice: 'deed paused' }
-        format.json { render :show, status: :created, location: @deed }
+        format.html { redirect_to :back, notice: 'deed paused' }
+        format.json { render json: {}, status: :created, location: @deed }
       else
         format.html { render :new }
         format.json { render json: @deed.errors, status: :unprocessable_entity }
@@ -82,8 +81,8 @@ class DeedsController < ApplicationController
     @deed.do
     respond_to do |format|
       if @deed.save
-        format.html { redirect_to @hustle, notice: 'deed done' }
-        format.json { render :show, status: :created, location: @deed }
+        format.html { redirect_to :back, notice: 'deed done' }
+        format.json { render json: {}, status: :created, location: @deed }
       else
         format.html { render :new }
         format.json { render json: @deed.errors, status: :unprocessable_entity }
@@ -96,8 +95,7 @@ class DeedsController < ApplicationController
   def destroy
     @deed.destroy
     respond_to do |format|
-      binding.pry
-      format.html { redirect_to @hustle, notice: 'Deed was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Deed was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
