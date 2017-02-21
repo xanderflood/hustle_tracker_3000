@@ -3,7 +3,6 @@
 %p
   = @user.name
 
-- binding.pry
 .chartbox{ data: @chart_data.to_json }
   = pie_chart @points_last_week, id: :timechart
 
