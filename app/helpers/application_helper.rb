@@ -61,11 +61,13 @@ module ApplicationHelper
     "#{roll.total_points} of #{roll.total_value} points"
   end
 
-  def live_label model, attrib, url
+  def live_label model, attrib, method, url, args={}
     return render partial: 'shared/live_label', locals: {
       model: model,
       attrib: attrib,
-      url: url
+      method: method,
+      url: url,
+      **args
     }
   end
 end

@@ -15,10 +15,12 @@ label.live-label:hover {
 }
 
 p.live-label {
-  margin: 01}
+  margin: 01;
+}
 
-input.live-label {
+.live-label-input {
   display: none;
+  font-weight: bold;
 }
 
 .btn.little {

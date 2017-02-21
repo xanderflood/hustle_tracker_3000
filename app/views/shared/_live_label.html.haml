@@ -2,15 +2,20 @@
 :ruby
   options = {} unless local_assigns[:options].present?
   data = { id: model.id }
+  input_tag ||= :input
+  enter_trigger ||= true
 
-.live-label-group{ 'data-target': url, 'data-id': model.id }
+.live-label-group{ 'data-target': url, 'data-id': model.id, 'data-field-name': attrib, 'data-model-name': model.class.name, 'data-http-method': method, 'data-enter-trigger': enter_trigger }
   %table
     %tr
       %td
         %label.live-label
           = model.send attrib
         .wrap
-          = tag :input, class: 'autoresize live-label', type: 'text', value: model.send(attrib), **options
+          - if input_tag == :input
+            = tag :input, { class: 'autoresize live-label live-label-input', type: 'text', value: model.send(attrib), **options }
+          - elsif input_tag == :textarea
+            = content_tag :textarea, model.send(attrib), { class: 'live-label live-label-input', type: 'text', **options }
       %td           
         %a.live-label.btn.btn-default.little
           .fa.fa-pencil

@@ -40,14 +40,14 @@ class DeedsController < ApplicationController
   # PATCH/PUT /deeds/1
   # PATCH/PUT /deeds/1.json
   def update
-    respond_to do |format|
-      if @deed.update(deed_params)
-        format.html { redirect_to @deed, notice: 'Deed was successfully updated.' }
-        format.json { render :show, status: :ok, location: @deed }
-      else
-        format.html { render :edit }
-        format.json { render json: @deed.errors, status: :unprocessable_entity }
-      end
+    opts = {
+      desc: params[:desc] || @deed.desc,
+      points: params[:points] || @deed.points
+    }
+    if @deed.update(opts)
+      render json: opts, status: :ok, location: @deed
+    else
+      render json: @deed.errors, status: :unprocessable_entity
     end
   end
 

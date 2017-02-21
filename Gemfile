@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -39,7 +39,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', platform: :ruby
 gem 'font-awesome-rails'
 gem 'font-awesome-sass'
-gem "bower-rails", "~> 0.11.0"
+gem 'bower-rails', '~> 0.11.0'  
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -2,15 +2,13 @@ $(document).ready(function() {
   //
   // resize on every keypress
   //
-  $('input.autoresize').keydown(function() {
-    LiveLabel.autoResize($(this));
-  });
+  $('input.autoresize').keydown(AutoResize.refresh);
 });
 
 //
 // utility functions
 //
-window.LiveLabel = window.LiveLabel || (function() {
+window.AutoResize = window.LiveLabel || (function() {
 
   var _clamp = function(val, min, max) {
     if (val < min)
@@ -31,12 +29,13 @@ window.LiveLabel = window.LiveLabel || (function() {
     return metrics.width;
   };
 
-  var _autoResize = function (box) {
-    var width = _getTextWidth(box.val(), 'bold 11pt arial');
-    box.css('width', _clamp(width, 40, 500) + 5);
+  var _refresh = function () {
+    var text = $(this).val();
+    var width = _getTextWidth(text, 'bold 11pt arial');
+    $(this).css('width', _clamp(width, 40, 500) + 5);
   };
 
   return {
-    autoResize: _autoResize
+    refresh: _refresh
   }
 })();

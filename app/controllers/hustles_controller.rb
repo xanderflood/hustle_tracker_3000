@@ -43,18 +43,18 @@ class HustlesController < ApplicationController
     end
   end
 
-  def rename
-    orig_name = @hustle.name
-    @hustle.name = params[:name]
-    respond_to do |format|
-      if @hustle.save
-        format.json { render json: { name: @hustle.name }, status: :ok, location: @hustle }
-      else
-        format.json { render json: { name: orig_name }, status: :unprocessable_entity }
-      end
-    end
-  end
-
+  # def rename
+  #   orig_name = @hustle.name
+  #   @hustle.name = params[:name]
+  #   respond_to do |format|
+  #     if @hustle.save
+  #       format.json { render json: { name: @hustle.name }, status: :ok, location: @hustle }
+  #     else
+  #       format.json { render json: { name: orig_name }, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+ 
   # PATCH/PUT /hustles/1
   # PATCH/PUT /hustles/1.json
   def update
@@ -63,14 +63,10 @@ class HustlesController < ApplicationController
       name: params[:name],
       modified: Time.now
     }
-    respond_to do |format|
-      if @hustle.update(hustle_params)
-        format.html { redirect_to @hustle, notice: 'Hustle was successfully updated.' }
-        format.json { render :show, status: :ok, location: @hustle }
-      else
-        format.html { render :edit }
-        format.json { render json: @hustle.errors, status: :unprocessable_entity }
-      end
+    if @hustle.update(hustle_params)
+      render json: hustle_params, status: :ok, location: @hustle
+    else
+      render json: @hustle.errors, status: :unprocessable_entity
     end
   end
 

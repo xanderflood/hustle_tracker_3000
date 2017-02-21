@@ -7,17 +7,19 @@ Rails.application.routes.draw do
   authenticated do
     root to: "hustles#index"
 
-    resources :hustles, only: [:index, :new, :create, :show, :destroy] do
+    glob_actions = [:index, :new, :create, :show, :update, :destroy]
+
+    resources :hustles, only: glob_actions do
       resources :deeds, only: [:new, :create]
 
-      post 'rename'
+      # post 'rename'
     end
 
-    resources :rolls, only: [:index, :new, :create, :show, :destroy] do
+    resources :rolls, only: glob_actions do
       post 'finish'
     end
 
-    resources :deeds, only: [:destroy] do
+    resources :deeds, only: [:destroy, :update] do
       post 'start'
       post 'pause'
       post 'do'

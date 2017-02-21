@@ -26,10 +26,9 @@
 #ideas-list.collapse{ class: (active.empty? ? 'in' : '') }
   - if ideas.any?
     = render partial: 'shared/deed_list', locals: { deeds: ideas }
-
 %hr
 
-%a{ href: '#done-list', 'data-toggle' => 'collapse' }
+%a{ href: '#dones-list', 'data-toggle' => 'collapse' }
   .panel-group
     .panel.panel-default
       .row

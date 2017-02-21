@@ -1,36 +1,17 @@
 .row
   .col-xs-12
-    = deed.desc
+    = live_label deed, :desc, :put, deed_path(deed), options: { multiline: true, rows: 3 }, input_tag: :textarea
 %hr{ color: '#000000' }
 .row
   .col-xs-3
   - if deed.total_elapsed < 30
     .col-xs-9
   - else
-    .col-xs-6.text-right time spent:@
+    .col-xs-6.text-right time spent:
     .col-cs-3
       = distance_of_time_in_words deed.total_elapsed.seconds
 .row
-  .col-xs-2.text-center
-    actions:
-  .col-xs-2.text-center
-    - if deed.started?
-      .dead-link start
-    - else
-      = link_to 'start', deed_start_path(deed), :method => :post
-  .col-xs-2.text-center
-    - if deed.active?
-      = link_to 'pause', deed_pause_path(deed), :method => :post
-    - else
-      .dead-link pause
-  .col-xs-2.text-center
-    - if deed.done?
-      .dead-link do
-    - else
-      = link_to 'do', deed_do_path(deed), :method => :post
-  .col-xs-2.text-center
-    = link_to 'delete', deed_path(deed), :method => :delete, :data => { :confirm => 'are you sure?' }
-  .col-xs-2.text-center
+  .col-xs-12.text-center
     %button.btn.btn-default.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
       Add to roll
       %span.caret
