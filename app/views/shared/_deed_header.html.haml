@@ -59,7 +59,7 @@
   = truncate deed.desc
 .right{ style: 'float: right;' }
   %span
-    = live_label deed, :points, :put, deed_path(deed), edit_button: false, box_options: { onkeypress: 'return event.charCode >= 48 && event.charCode <= 57' }, group_options: { style: 'float: left; margin-top: 4px;' }
+    = live_label deed, :points, :put, deed_path(deed), edit_button: false, box_options: { onkeypress: 'return event.charCode >= 48 && event.charCode <= 57' }, group_options: { style: 'float: left;' }
     points
   %span.close-col
     .btn.action-btn{ title: 'delete', data: delete_data, rel: 'nofollow' }

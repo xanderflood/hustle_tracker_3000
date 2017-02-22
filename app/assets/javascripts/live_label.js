@@ -49,8 +49,11 @@ window.LiveLabel = (function() {
     })
 
     .done(function(data, textStatus, jqXHR) {
-      var input = context.find('.live-label-input')
-      context.find('label.live-label').text(input.val()).show();
+      var input = context.find('.live-label-input');
+      var text = input.val().replace(/\n/g, "<br />");
+      var label = context.find('label.live-label');
+      label[0].innerHTML = text;
+      label.show();
       input.hide();
     })
 

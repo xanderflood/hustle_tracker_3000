@@ -7,7 +7,7 @@ label.live-label {
   padding-top: 0px;
   padding-left: 2px;
   padding-right: 2px;
-  border: 1px solid white;
+  border: 1px dotted white;
 }
 
 label.live-label:hover {
