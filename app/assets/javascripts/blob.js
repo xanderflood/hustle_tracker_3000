@@ -60,6 +60,9 @@ $(function() {
     });
   };
 
+  //
+  // respond to pause/play/ff buttons
+  //
   $('.action-btn').click(function (event) {
     _action(
       $(this).closest('.panel-heading'),

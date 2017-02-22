@@ -10,8 +10,8 @@
   head_class = '' unless local_assigns[:head_class].present?
   open = false unless local_assigns[:open].present?
 
-.panel-group{ id: panel_id, class: head_class }
-  .panel.panel-default
+.panel-group{ id: panel_id }
+  .panel.panel-default{ class: head_class }
     .blob-link{ 'data-toggle' => 'collapse', href: "#collapse#{panel_id}" }
       .panel-heading{ class: head_class }
         - if local_assigns[:head].present?
