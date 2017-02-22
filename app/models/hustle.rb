@@ -6,4 +6,6 @@ class Hustle < ApplicationRecord
 
   validates_uniqueness_of :name
   validates_uniqueness_of :name, message: "this name is already taken - please choose another"
+
+  def active?; deeds.any?{ |d| d.active? }; end
 end

@@ -10,9 +10,9 @@
   head_class = '' unless local_assigns[:head_class].present?
   open = false unless local_assigns[:open].present?
 
-.panel-group{ id: panel_id }
+.panel-group{ id: panel_id, class: head_class }
   .panel.panel-default
-    .blob-link{ 'data-toggle' => "collapse", href: "#collapse#{panel_id}" }
+    .blob-link{ 'data-toggle' => 'collapse', href: "#collapse#{panel_id}" }
       .panel-heading{ class: head_class }
         - if local_assigns[:head].present?
           = render partial: head, locals: { open: open }.merge!(head_locals)
@@ -20,6 +20,8 @@
           .row
             - if local_assigns[:head_left].present?
               %div{ class: "col-xs-#{width}" }
+                - if local_assigns[:head_icon]
+                  %div{ class: head_icon }
                 = head_left
             - if local_assigns[:head_center].present?
               %div{ class: "col-xs-#{width} text-center" }

@@ -14,7 +14,9 @@ module ApplicationHelper
   def hustle_blob hustle
     return render partial: 'shared/blob', locals: {
       head_locals: { hustle: hustle },
+      head_class: 'hustle',
       panel_id: "hustle_blob_#{hustle.id}",
+      head_icon: (hustle.active? ? 'fa fa-dot-circle-o active-hustle' : nil),
       head_left: truncate(hustle.name),
       head_center: "#{time_ago_in_words(hustle.modified)} ago",
       head_right: "#{hustle.total_points} points",

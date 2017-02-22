@@ -2,9 +2,16 @@ class Deed < ApplicationRecord
   class StateError < StandardError; end
 
   before_validation(on: :create) do
-    self.thought_at ||= Time.now
-    self.started_at ||= Time.now if started?
-    self.finished_at ||= Time.now if done?
+    now = Time.now
+
+    self.thought_at ||= now
+
+    if started?
+      self.started_at ||= now
+      self.eph_started_at ||= now
+    end
+
+    self.finished_at ||= now if done?
   end
 
   belongs_to :hustle, touch: true
@@ -32,6 +39,7 @@ class Deed < ApplicationRecord
     ret
   end
 
+  def active?; state == 'active'; end
   def started?; state != 'idea'; end
   def done?; state == 'done'; end
 
