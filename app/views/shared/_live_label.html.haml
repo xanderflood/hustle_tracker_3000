@@ -1,11 +1,15 @@
 -# requires 'model' 'attr' 'url'
 :ruby
-  options = {} unless local_assigns[:options].present?
-  data = { id: model.id }
-  input_tag ||= :input
-  enter_trigger ||= true
+  box_options ||= {}
+  group_options ||= {} 
 
-.live-label-group{ 'data-target': url, 'data-id': model.id, 'data-field-name': attrib, 'data-model-name': model.class.name, 'data-http-method': method, 'data-enter-trigger': enter_trigger }
+  data = { id: model.id }
+  model_name = model.class.name
+  input_tag = :input unless local_assigns[:input_tag].present?
+  enter_trigger = true if local_assigns[:enter_trigger].nil?
+  edit_button = true if local_assigns[:edit_button].nil?
+
+.live-label-group{ 'data-target': url, 'data-id': model.id, 'data-field-name': attrib, 'data-model-name': model_name, 'data-http-method': method, 'data-enter-trigger': enter_trigger, **group_options }
   %table
     %tr
       %td
@@ -13,9 +17,10 @@
           = model.send attrib
         .wrap
           - if input_tag == :input
-            = tag :input, { class: 'autoresize live-label live-label-input', type: 'text', value: model.send(attrib), **options }
+            = tag :input, { class: 'autoresize live-label live-label-input', type: 'text', value: model.send(attrib), **box_options }
           - elsif input_tag == :textarea
-            = content_tag :textarea, model.send(attrib), { class: 'live-label live-label-input', type: 'text', **options }
-      %td           
-        %a.live-label.btn.btn-default.little
-          .fa.fa-pencil
+            = content_tag :textarea, model.send(attrib), { class: 'live-label live-label-input', type: 'text', **box_options }
+      - if edit_button
+        %td
+          %a.live-label.btn.btn-default.little
+            .fa.fa-pencil

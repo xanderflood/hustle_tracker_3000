@@ -1,6 +1,6 @@
 .row
   .col-xs-12
-    = live_label deed, :desc, :put, deed_path(deed), options: { multiline: true, rows: 3 }, input_tag: :textarea
+    = live_label deed, :desc, :put, deed_path(deed), box_options: { multiline: true, rows: 3 }, input_tag: :textarea
 %hr{ color: '#000000' }
 .row
   .col-xs-3
@@ -20,6 +20,8 @@
       %li
         %a.new-roll-link{ href: '#' }
           Add to new roll...
+      - if current_user.rolls.any?
+        %li.divider
       - current_user.rolls.each do |r|
         %li
           = link_to r.name, deed_roll_add_path(deed, r), method: :post

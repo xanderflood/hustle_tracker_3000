@@ -3,7 +3,7 @@
     .panel-heading
       .row
         .col-xs-4
-          = live_label @hustle, :name, :patch, hustle_path(@hustle), options: { enter_trigger: false }
+          = live_label @hustle, :name, :patch, hustle_path(@hustle), box_options: { enter_trigger: false }
         .col-xs-4.text-center
           = link_to 'do a deed', new_hustle_deed_path(@hustle)
         .col-xs-4.text-right
