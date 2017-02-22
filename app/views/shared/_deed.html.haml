@@ -11,14 +11,14 @@
     .col-cs-3
       = distance_of_time_in_words deed.total_elapsed.seconds
 .row
-  .col-xs-12.text-center
+  .col-xs-12
     %button.btn.btn-default.dropdown-toggle{ type: 'button', 'data-toggle' => 'dropdown' }
       Add to roll
       %span.caret
 
     %ul.dropdown-menu
       %li
-        %a{ href: '#' }
+        %a.new-roll-link{ href: '#' }
           Add to new roll...
       - current_user.rolls.each do |r|
         %li
