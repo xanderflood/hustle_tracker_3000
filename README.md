@@ -1,24 +1,3 @@
-# README
+# hustletracker 3000
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+hustle-tracker-3000 is a simple Rails application for tracking ones personal hustles. Its structure is vaguely inspired by JIRA's model of individual tasks with time estimations, but places a bigger emphasis on organizing those tasks into projects and tracking, rather than prescribing, the amount of time spent on each one.
